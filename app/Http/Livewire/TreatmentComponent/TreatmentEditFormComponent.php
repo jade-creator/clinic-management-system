@@ -6,17 +6,12 @@ use App\Models\Category;
 use App\Models\Treatment;
 use Livewire\Component;
 
-class TreatmentAddFormComponent extends Component
+class TreatmentEditFormComponent extends Component
 {
     public Treatment $treatment;
 
     public function render() { return 
-        view('livewire.treatment-component.treatment-add-form-component');
-    }
-
-    public function mount() 
-    {
-        $this->treatment = new Treatment();    
+        view('livewire.treatment-component.treatment-edit-form-component');
     }
 
     public function rules()
@@ -37,6 +32,6 @@ class TreatmentAddFormComponent extends Component
     public function create()
     {
         $this->validate();
-        $this->treatment->save();
+        $this->treatment->update();
     }
 }
