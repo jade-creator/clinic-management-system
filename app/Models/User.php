@@ -11,6 +11,29 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    public function role(){ return 
+        $this->belongsTo(Role::class);
+    }
+
+    public function profile(){ return
+        $this->hasOne(Profile::class);
+    }
+
+    public function patient(){ return
+        $this->hasOne(Patient::class);
+    }
+
+    // public function patientAppointments(){ return
+    //     $this->hasManyThrough(Appointment::class, Patient::class);
+    // }
+
+    public function doctor(){ return
+        $this->hasOne(Doctor::class);
+    }
+
+    public function receptionist(){ return
+        $this->hasOne(Receptionist::class);
+    }
     /**
      * The attributes that are mass assignable.
      *
@@ -20,6 +43,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role_id',
     ];
 
     /**

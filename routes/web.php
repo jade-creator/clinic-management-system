@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Livewire\AppointmentComponent\AppointmentAddFormComponent;
+use App\Http\Livewire\AppointmentComponent\AppointmentViewComponent;
+use App\Http\Livewire\ProfileComponent\ProfileAddFormComponent;
+use App\Http\Livewire\ProfileComponent\ProfileEditFormComponent;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +25,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::middleware('auth')->group( function() {
+    Route::get('/profile', ProfileAddFormComponent::class)->name('profile.add');
+    Route::get('/profile/{role}/{user_id}', ProfileEditFormComponent::class)->name('profile.view');
+
+    Route::get('/appointments/add', AppointmentAddFormComponent::class)->name('appointment.add');
+    Route::get('/appointments', AppointmentViewComponent::class)->name('appointment.view');
+});
