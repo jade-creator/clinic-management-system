@@ -2,6 +2,9 @@
 
 use App\Http\Livewire\AppointmentComponent\AppointmentAddFormComponent;
 use App\Http\Livewire\AppointmentComponent\AppointmentViewComponent;
+use App\Http\Livewire\CategoryComponent\CategoryAddFormComponent;
+use App\Http\Livewire\CategoryComponent\CategoryEditFormComponent;
+use App\Http\Livewire\CategoryComponent\CategoryViewComponent;
 use App\Http\Livewire\ProfileComponent\ProfileAddFormComponent;
 use App\Http\Livewire\ProfileComponent\ProfileEditFormComponent;
 use Illuminate\Support\Facades\Auth;
@@ -32,4 +35,14 @@ Route::middleware('auth')->group( function() {
 
     Route::get('/appointments/add', AppointmentAddFormComponent::class)->name('appointment.add');
     Route::get('/appointments', AppointmentViewComponent::class)->name('appointment.view');
+
+    Route::get('/categories/add', CategoryAddFormComponent::class)->name('categories.add');
+    Route::get('/categories/edit/{category}', CategoryEditFormComponent::class)->name('categories.edit');
+    Route::get('/categories', CategoryViewComponent::class)->name('categories.view');
+
+    // Route::get('/categories/add', CategoryAddFormComponent::class)->name('categories.add');
+    // Route::get('/categories/edit/{category}', CategoryEditFormComponent::class)->name('categories.edit');
+    // Route::get('/categories', CategoryViewComponent::class)->name('categories.view');
+
+
 });
