@@ -20,4 +20,8 @@ class Treatment extends Model
     public function category() { return
         $this->belongsTo(Category::class);
     }
+
+    public function stock() { return
+        $this->hasOne(Stock::class);
+    }
 }

@@ -7,6 +7,9 @@ use App\Http\Livewire\CategoryComponent\CategoryEditFormComponent;
 use App\Http\Livewire\CategoryComponent\CategoryViewComponent;
 use App\Http\Livewire\ProfileComponent\ProfileAddFormComponent;
 use App\Http\Livewire\ProfileComponent\ProfileEditFormComponent;
+use App\Http\Livewire\StockComponent\StockAddFormComponent;
+use App\Http\Livewire\StockComponent\StockEditFormComponent;
+use App\Http\Livewire\StockComponent\StockViewComponent;
 use App\Http\Livewire\TreatmentComponent\TreatmentAddFormComponent;
 use App\Http\Livewire\TreatmentComponent\TreatmentEditFormComponent;
 use App\Http\Livewire\TreatmentComponent\TreatmentViewComponent;
@@ -46,4 +49,8 @@ Route::middleware('auth')->group( function() {
     Route::get('/treatments/add', TreatmentAddFormComponent::class)->name('treatments.add');
     Route::get('/treatments', TreatmentViewComponent::class)->name('treatments.view');
     Route::get('/treatments/edit/{treatment}', TreatmentEditFormComponent::class)->name('treatments.edit');
+
+    Route::get('/stocks/add', StockAddFormComponent::class)->name('stocks.add');
+    Route::get('/stocks', StockViewComponent::class)->name('stocks.view');
+    Route::get('/stocks/edit/{stock}', StockEditFormComponent::class)->name('stocks.edit');
 });
