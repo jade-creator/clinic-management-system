@@ -7,6 +7,9 @@ use App\Http\Livewire\CategoryComponent\CategoryEditFormComponent;
 use App\Http\Livewire\CategoryComponent\CategoryViewComponent;
 use App\Http\Livewire\ProfileComponent\ProfileAddFormComponent;
 use App\Http\Livewire\ProfileComponent\ProfileEditFormComponent;
+use App\Http\Livewire\TreatmentComponent\TreatmentAddFormComponent;
+use App\Http\Livewire\TreatmentComponent\TreatmentEditFormComponent;
+use App\Http\Livewire\TreatmentComponent\TreatmentViewComponent;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -37,12 +40,10 @@ Route::middleware('auth')->group( function() {
     Route::get('/appointments', AppointmentViewComponent::class)->name('appointment.view');
 
     Route::get('/categories/add', CategoryAddFormComponent::class)->name('categories.add');
-    Route::get('/categories/edit/{category}', CategoryEditFormComponent::class)->name('categories.edit');
     Route::get('/categories', CategoryViewComponent::class)->name('categories.view');
+    Route::get('/categories/edit/{category}', CategoryEditFormComponent::class)->name('categories.edit');
 
-    // Route::get('/categories/add', CategoryAddFormComponent::class)->name('categories.add');
-    // Route::get('/categories/edit/{category}', CategoryEditFormComponent::class)->name('categories.edit');
-    // Route::get('/categories', CategoryViewComponent::class)->name('categories.view');
-
-
+    Route::get('/treatments/add', TreatmentAddFormComponent::class)->name('treatments.add');
+    Route::get('/treatments', TreatmentViewComponent::class)->name('treatments.view');
+    Route::get('/treatments/edit/{treatment}', TreatmentEditFormComponent::class)->name('treatments.edit');
 });
