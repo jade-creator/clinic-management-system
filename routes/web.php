@@ -5,6 +5,7 @@ use App\Http\Livewire\AppointmentComponent\AppointmentViewComponent;
 use App\Http\Livewire\CategoryComponent\CategoryAddFormComponent;
 use App\Http\Livewire\CategoryComponent\CategoryEditFormComponent;
 use App\Http\Livewire\CategoryComponent\CategoryViewComponent;
+use App\Http\Livewire\Doctor\AppointmentComponent\DoctorAppointmentAddFormComponent;
 use App\Http\Livewire\ProfileComponent\ProfileAddFormComponent;
 use App\Http\Livewire\ProfileComponent\ProfileEditFormComponent;
 use App\Http\Livewire\Receptionist\AppointmentComponent\ReceptionistAppointmentAddFormComponent;
@@ -45,7 +46,7 @@ Route::middleware('auth')->group( function() {
     Route::get('/appointments/add', AppointmentAddFormComponent::class)->name('appointment.add');
     Route::get('/appointments', AppointmentViewComponent::class)->name('appointment.view');
     Route::get('receptionist/appointments/add', ReceptionistAppointmentAddFormComponent::class)->name('receptionist.appointment.add');
-    // Route::get('doctor/appointments/add', ReceptionistAppointmentAddFormComponent::class)->name('receptionist.appointment.add');
+    Route::get('doctor/appointments/add', DoctorAppointmentAddFormComponent::class)->name('doctor.appointment.add');
 
     //CATEGORIES
     Route::get('/categories/add', CategoryAddFormComponent::class)->name('categories.add');
