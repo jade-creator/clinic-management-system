@@ -1,21 +1,19 @@
 <?php
 
-use App\Http\Livewire\AppointmentComponent\AppointmentAddFormComponent;
 use App\Http\Livewire\AppointmentComponent\AppointmentEditFormComponent;
 use App\Http\Livewire\AppointmentComponent\AppointmentViewComponent;
 use App\Http\Livewire\CategoryComponent\CategoryAddFormComponent;
 use App\Http\Livewire\CategoryComponent\CategoryEditFormComponent;
 use App\Http\Livewire\CategoryComponent\CategoryViewComponent;
 use App\Http\Livewire\Doctor\AppointmentComponent\DoctorAppointmentAddFormComponent;
-use App\Http\Livewire\Doctor\AppointmentComponent\DoctorAppointmentEditFormComponent;
-use App\Http\Livewire\Doctor\AppointmentComponent\DoctorAppointmentViewComponent;
 use App\Http\Livewire\Patient\AppointmentComponent\PatientAppointmentAddFormComponent;
 use App\Http\Livewire\Patient\AppointmentComponent\PatientAppointmentViewComponent;
+use App\Http\Livewire\PrescriptionComponent\PrescriptionAddFormComponent;
+use App\Http\Livewire\PrescriptionComponent\PrescriptionEditFormComponent;
+use App\Http\Livewire\PrescriptionComponent\PrescriptionViewComponent;
 use App\Http\Livewire\ProfileComponent\ProfileAddFormComponent;
 use App\Http\Livewire\ProfileComponent\ProfileEditFormComponent;
 use App\Http\Livewire\Receptionist\AppointmentComponent\ReceptionistAppointmentAddFormComponent;
-use App\Http\Livewire\Receptionist\AppointmentComponent\ReceptionistAppointmentEditFormComponent;
-use App\Http\Livewire\Receptionist\AppointmentComponent\ReceptionistAppointmentViewComponent;
 use App\Http\Livewire\StockComponent\StockAddFormComponent;
 use App\Http\Livewire\StockComponent\StockEditFormComponent;
 use App\Http\Livewire\StockComponent\StockViewComponent;
@@ -64,8 +62,12 @@ Route::middleware('auth')->group( function() {
     });
 
     Route::middleware('role:receptionist|doctor|admin')->group( function() {
+        //APPOINTMENTS
         Route::get('/appointments', AppointmentViewComponent::class)->name('appointments.view');
         Route::get('/appointments/edit/{appointment}', AppointmentEditFormComponent::class)->name('appointment.edit');
+
+        //PRESCRIPTIONS
+        Route::get('/prescriptions', PrescriptionViewComponent::class)->name('prescriptions.view');
 
         //CATEGORIES
         Route::get('/categories/add', CategoryAddFormComponent::class)->name('categories.add');
@@ -81,5 +83,11 @@ Route::middleware('auth')->group( function() {
         Route::get('/stocks/add', StockAddFormComponent::class)->name('stocks.add');
         Route::get('/stocks', StockViewComponent::class)->name('stocks.view');
         Route::get('/stocks/edit/{stock}', StockEditFormComponent::class)->name('stocks.edit');
+    });
+
+    Route::middleware('role:doctor|admin')->group( function() {
+        //PRESCRIPTIONS
+        Route::get('/prescriptions/add', PrescriptionAddFormComponent::class)->name('prescriptions.add');
+        Route::get('/prescriptions/edit/{prescription}', PrescriptionEditFormComponent::class)->name('prescriptions.edit');
     });
 });
