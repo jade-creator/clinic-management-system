@@ -17,31 +17,22 @@
     <table>
         <thead>
             <tr>
-                <th>Patient ID</th>
-                <th>Patient Name</th>
+                <th>ID</th>
                 <th>Schedule</th>
                 <th>Status</th>
                 <th>Remarks</th>
-                <th>Doctor ID</th>
-                <th>Doctor Name</th>
+                <th>Doctor</th>
             </tr>
         </thead>
         <tbody>
             @forelse ($appointments as $appointment)
                 <tr>
-                    <td>{{ $appointment->patient->id }}</td>
-                    <td>{{ $appointment->patient->user->name }}</td>
+                    <td>{{ $appointment->id }}</td>
                     <td>{{ $appointment->scheduled_at }}</td>
                     <td>{{ $appointment->status->name }}</td>
                     <td>{{ $appointment->remarks }}</td>
-                    <td>{{ $appointment->doctor->id ?? 'N/A' }}</td>
-                    <td>{{ $appointment->doctor->user->name ?? 'N/A' }}</td>
-                    <td>
-                        <a href="{{ route('appointment.edit', $appointment)}}">
-                            <button>Edit</button>
-                        </a>
-                    </td>
-                </tr>]
+                    <td>{{ $appointment->doctor->name ?? 'N/A' }}</td>
+                </tr>
             @empty
                 <tr>
                     <td>No appointments</td>

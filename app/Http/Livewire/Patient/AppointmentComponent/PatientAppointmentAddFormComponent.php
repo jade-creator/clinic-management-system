@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Http\Livewire\AppointmentComponent;
+namespace App\Http\Livewire\Patient\AppointmentComponent;
 
-use App\Models\Status;
-use Livewire\Component;
 use App\Models\Appointment;
+use App\Models\Status;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Component;
 
-class AppointmentAddFormComponent extends Component
+class PatientAppointmentAddFormComponent extends Component
 {
     public Appointment $appointment;
     public $patientId;
     public $patientName;
 
     public function render() { return 
-        view('livewire.appointment-component.appointment-add-form-component');
+        view('livewire.patient.appointment-component.patient-appointment-add-form-component');
     }
 
     public function mount() 
