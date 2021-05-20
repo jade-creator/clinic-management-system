@@ -8,6 +8,10 @@ use App\Http\Livewire\CategoryComponent\CategoryViewComponent;
 use App\Http\Livewire\Doctor\AppointmentComponent\DoctorAppointmentAddFormComponent;
 use App\Http\Livewire\Patient\AppointmentComponent\PatientAppointmentAddFormComponent;
 use App\Http\Livewire\Patient\AppointmentComponent\PatientAppointmentViewComponent;
+use App\Http\Livewire\PatientComponent\PatientViewComponent;
+use App\Http\Livewire\PaymentComponent\PaymentAddFormComponent;
+use App\Http\Livewire\PaymentComponent\PaymentEditFormComponent;
+use App\Http\Livewire\PaymentComponent\PaymentViewComponent;
 use App\Http\Livewire\PrescriptionComponent\PrescriptionAddFormComponent;
 use App\Http\Livewire\PrescriptionComponent\PrescriptionEditFormComponent;
 use App\Http\Livewire\PrescriptionComponent\PrescriptionViewComponent;
@@ -83,6 +87,15 @@ Route::middleware('auth')->group( function() {
         Route::get('/stocks/add', StockAddFormComponent::class)->name('stocks.add');
         Route::get('/stocks', StockViewComponent::class)->name('stocks.view');
         Route::get('/stocks/edit/{stock}', StockEditFormComponent::class)->name('stocks.edit');
+
+        //PAYMENTS
+        Route::get('/payments/add', PaymentAddFormComponent::class)->name('payments.add');
+        Route::get('/payments', PaymentViewComponent::class)->name('payments.view');
+        // Route::get('/payments/edit/{payment}', PaymentEditFormComponent::class)->name('payments.edit');
+
+        //PATIENTS
+        Route::get('/patients', PatientViewComponent::class)->name('patients.view');
+
     });
 
     Route::middleware('role:doctor|admin')->group( function() {
