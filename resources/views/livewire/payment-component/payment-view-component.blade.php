@@ -26,11 +26,11 @@
                     <td>{{ $payment->discount ?? 'N/A'  }}</td>
                     <td>{{ $payment->grand_total  }}</td>
                     <td>{{ $payment->deposits->sum('amount_deposit')  }}</td>
-                    <td>{{ $payment->grand_total - $payment->deposits->sum('amount_deposit')  }}</td>
+                    <td>{{ $payment->due  }}</td>
                     <td>
-                        <a href="{{ route('payments.edit', $payment) }}">
+                        {{-- <a href="{{ route('payments.edit', $payment) }}">
                             <button type="submit">Edit</button>
-                        </a>
+                        </a> --}}
                     </td>
                 </tr>
             @empty

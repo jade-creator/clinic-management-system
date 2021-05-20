@@ -107,7 +107,10 @@ class PaymentAddFormComponent extends Component
 
         $items = (new CollectItems())->array_columns($this->items, 'quantity,amount', 'id');
 
+        $this->payment->due = $this->payment->grand_total - $this->deposit->amount_deposit;
+        
         $this->payment->save();
+
         $this->payment->treatments()->attach($items);
 
         $this->payment->deposits()->save($this->deposit);

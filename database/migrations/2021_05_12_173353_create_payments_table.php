@@ -19,6 +19,7 @@ class CreatePaymentsTable extends Migration
             $table->boolean('isPercent');
             $table->double('discount');
             $table->double('grand_total');
+            $table->unsignedDouble('due');
             $table->timestamps();
             $table->foreignId('patient_id')->onDelete('cascade')->constrained();
         });
