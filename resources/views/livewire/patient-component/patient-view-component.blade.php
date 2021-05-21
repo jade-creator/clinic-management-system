@@ -14,7 +14,7 @@
                     <td>{{ $patient->id }}</td>
                     <td>{{ $patient->user->name }}</td>
                     <td>{{ $patient->user->profile->phone_number }}</td>
-                    <td>{{ $patient->payments->sum('grand_total') }}</td>
+                    <td>{{ $patient->payments->sum('due') }}</td>
                     {{-- <td>
                         <a href="{{ route('categories.edit', $category) }}">
                             <button type="submit">Edit</button>

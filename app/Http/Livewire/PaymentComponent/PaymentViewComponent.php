@@ -19,6 +19,6 @@ class PaymentViewComponent extends Component
     }
 
     public function getRowsProperty() { return
-        Payment::with([ 'patient', 'patient.user', 'deposits'])->get();
+        Payment::with([ 'patient', 'patient.user'])->get();
     }
 }
