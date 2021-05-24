@@ -19,4 +19,14 @@ class History extends Model
     public function patient() { return
         $this->belongsTo(Patient::class);
     }
+
+    public static function search($search)
+    {
+        $search = '%'.$search.'%';
+
+        return empty($search) ? static::query()
+            : static::where(function ($query) use ($search){
+                return $query->where('patient_id', 'LIKE', $search);
+            });
+    }
 }

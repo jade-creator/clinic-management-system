@@ -41,7 +41,7 @@
                             <button>Edit</button>
                         </a>
                     </td>
-                </tr>]
+                </tr>
             @empty
                 <tr>
                     <td>No appointments</td>

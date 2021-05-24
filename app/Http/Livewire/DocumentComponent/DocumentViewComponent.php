@@ -3,11 +3,21 @@
 namespace App\Http\Livewire\DocumentComponent;
 
 use App\Models\Document;
-use Illuminate\Support\Facades\Storage;
+use App\Traits\WithFilters;
 use Livewire\Component;
 
 class DocumentViewComponent extends Component
 {
+    use WithFilters;
+
+    public $queryString = [
+        'search' => ['except' => '']
+    ];
+
+    public $updatesQueryString = [
+        'search'
+    ];  
+
     public function render() { return 
         view('livewire.document-component.document-view-component', [
             'documents' => $this->rows
@@ -15,7 +25,10 @@ class DocumentViewComponent extends Component
     }
 
     public function getRowsProperty() { return
-        Document::with('patient.user')->latest()->get();
+        Document::search($this->search)
+            ->with('patient.user')
+            ->latest()
+            ->get();
     }
 
     public function download($path, $fileName) 
