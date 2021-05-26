@@ -6,8 +6,12 @@ use App\Http\Livewire\CategoryComponent\CategoryAddFormComponent;
 use App\Http\Livewire\CategoryComponent\CategoryEditFormComponent;
 use App\Http\Livewire\CategoryComponent\CategoryViewComponent;
 use App\Http\Livewire\Doctor\AppointmentComponent\DoctorAppointmentAddFormComponent;
+use App\Http\Livewire\HistoryComponent\HistoryAddFormComponent;
+use App\Http\Livewire\HistoryComponent\HistoryEditFormComponent;
+use App\Http\Livewire\HistoryComponent\HistoryViewComponent;
 use App\Http\Livewire\Patient\AppointmentComponent\PatientAppointmentAddFormComponent;
 use App\Http\Livewire\Patient\AppointmentComponent\PatientAppointmentViewComponent;
+use App\Http\Livewire\PatientComponent\PatientAddFormComponent;
 use App\Http\Livewire\PatientComponent\PatientViewComponent;
 use App\Http\Livewire\PaymentComponent\PaymentAddFormComponent;
 use App\Http\Livewire\PaymentComponent\PaymentEditFormComponent;
@@ -91,10 +95,14 @@ Route::middleware('auth')->group( function() {
         //PAYMENTS
         Route::get('/payments/add', PaymentAddFormComponent::class)->name('payments.add');
         Route::get('/payments', PaymentViewComponent::class)->name('payments.view');
-        // Route::get('/payments/edit/{payment}', PaymentEditFormComponent::class)->name('payments.edit');
 
         //PATIENTS
         Route::get('/patients', PatientViewComponent::class)->name('patients.view');
+
+        //CASES
+        Route::get('/case-histories/add', HistoryAddFormComponent::class)->name('histories.add');
+        Route::get('/case-histories', HistoryViewComponent::class)->name('histories.view');
+        Route::get('/case-histories/edit/{history}', HistoryEditFormComponent::class)->name('histories.edit');
 
     });
 
