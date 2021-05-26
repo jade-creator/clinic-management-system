@@ -4,12 +4,23 @@ namespace App\Http\Livewire\AppointmentComponent;
 
 use App\Models\Appointment;
 use App\Models\Status;
+use App\Traits\WithFilters;
 use Livewire\Component;
 
 class AppointmentViewComponent extends Component
 {
+    use WithFilters;
+
     public $status = '';
     public $byDate = '';
+
+    protected $queryString = [
+        'search' => ['except' => '']
+    ];
+
+    protected $updatesQueryString = [
+        'search'
+    ];
 
     public function render() 
     { 
@@ -20,7 +31,8 @@ class AppointmentViewComponent extends Component
 
     public function getRowsProperty() 
     { 
-        return Appointment::with(['patient', 'patient.user', 'status', 'doctor', 'doctor.user'])
+        return Appointment::search($this->search)
+                ->with(['patient', 'patient.user', 'status', 'doctor', 'doctor.user'])
                 ->when(!empty($this->status), 
                     fn ($query) => $query->where('status_id', $this->status))
                 ->when(!empty($this->byDate), 

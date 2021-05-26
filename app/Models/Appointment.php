@@ -28,4 +28,14 @@ class Appointment extends Model
     public function status() { return
         $this->belongsTo(Status::class);
     }
+
+    public static function search($search)
+    {
+        $search = '%'.$search.'%';
+
+        return empty($search) ? static::query()
+            : static::where(function ($query) use ($search){
+                return $query->where('patient_id', 'LIKE', $search);
+            });
+    }
 }

@@ -17,4 +17,14 @@ class Category extends Model
     public function treatments() { return
         $this->hasMany(Treatment::class);
     }
+
+    public static function search($search)
+    {
+        $search = '%'.$search.'%';
+
+        return empty($search) ? static::query()
+            : static::where(function ($query) use ($search){
+                return $query->where('category', 'LIKE', $search);
+            });
+    }
 }
