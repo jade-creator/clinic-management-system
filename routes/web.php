@@ -6,6 +6,7 @@ use App\Http\Livewire\CategoryComponent\CategoryAddFormComponent;
 use App\Http\Livewire\CategoryComponent\CategoryEditFormComponent;
 use App\Http\Livewire\CategoryComponent\CategoryViewComponent;
 use App\Http\Livewire\Doctor\AppointmentComponent\DoctorAppointmentAddFormComponent;
+use App\Http\Livewire\DoctorComponent\DoctorViewComponent;
 use App\Http\Livewire\DocumentComponent\DocumentAddFormComponent;
 use App\Http\Livewire\DocumentComponent\DocumentEditFormComponent;
 use App\Http\Livewire\DocumentComponent\DocumentViewComponent;
@@ -110,6 +111,9 @@ Route::middleware('auth')->group( function() {
         Route::get('/documents', DocumentViewComponent::class)->name('documents.view');
         Route::get('/documents/edit/{document}', DocumentEditFormComponent::class)->name('documents.edit');
 
+        //DOCTORS
+        Route::get('/doctors', DoctorViewComponent::class)->name('doctors.view');
+        
     });
 
     Route::middleware('role:doctor|admin')->group( function() {
