@@ -6,6 +6,9 @@ use App\Http\Livewire\CategoryComponent\CategoryAddFormComponent;
 use App\Http\Livewire\CategoryComponent\CategoryEditFormComponent;
 use App\Http\Livewire\CategoryComponent\CategoryViewComponent;
 use App\Http\Livewire\Doctor\AppointmentComponent\DoctorAppointmentAddFormComponent;
+use App\Http\Livewire\DocumentComponent\DocumentAddFormComponent;
+use App\Http\Livewire\DocumentComponent\DocumentEditFormComponent;
+use App\Http\Livewire\DocumentComponent\DocumentViewComponent;
 use App\Http\Livewire\HistoryComponent\HistoryAddFormComponent;
 use App\Http\Livewire\HistoryComponent\HistoryEditFormComponent;
 use App\Http\Livewire\HistoryComponent\HistoryViewComponent;
@@ -103,6 +106,11 @@ Route::middleware('auth')->group( function() {
         Route::get('/case-histories/add', HistoryAddFormComponent::class)->name('histories.add');
         Route::get('/case-histories', HistoryViewComponent::class)->name('histories.view');
         Route::get('/case-histories/edit/{history}', HistoryEditFormComponent::class)->name('histories.edit');
+
+        //DOCUMENTS
+        Route::get('/documents/add', DocumentAddFormComponent::class)->name('documents.add');
+        Route::get('/documents', DocumentViewComponent::class)->name('documents.view');
+        Route::get('/documents/edit/{document}', DocumentEditFormComponent::class)->name('documents.edit');
 
     });
 
