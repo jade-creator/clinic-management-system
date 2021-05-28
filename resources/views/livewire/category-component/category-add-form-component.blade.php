@@ -15,7 +15,7 @@
     <form method="post" wire:submit.prevent="create">
         <div class="form-group">
             <label for="category">My Name</label>
-            <input type="text" class="form-control" id="category" name="category" required autofocus wire:model.defer="category.category" wire:loading.attr="disabled">
+            <input type="text" class="form-control" id="category" name="category" required autofocus wire:model.defer="category.name" wire:loading.attr="disabled">
         </div>
         <div class="form-group">
             <label for="description">Description</label>

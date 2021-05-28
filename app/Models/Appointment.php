@@ -35,7 +35,9 @@ class Appointment extends Model
 
         return empty($search) ? static::query()
             : static::where(function ($query) use ($search){
-                return $query->where('patient_id', 'LIKE', $search);
+                return $query
+                        ->where('patient_id', 'LIKE', $search)
+                        ->orWhere('remarks', 'LIKE', $search);
             });
     }
 }

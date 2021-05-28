@@ -26,7 +26,10 @@ class Document extends Model
 
         return empty($search) ? static::query()
             : static::where(function ($query) use ($search){
-                return $query->where('patient_id', 'LIKE', $search);
+                return $query
+                        ->where('patient_id', 'LIKE', $search)
+                        ->orWhere('description', 'LIKE', $search)
+                        ->orWhere('name', 'LIKE', $search);
             });
     }
 }

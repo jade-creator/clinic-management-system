@@ -26,7 +26,11 @@ class History extends Model
 
         return empty($search) ? static::query()
             : static::where(function ($query) use ($search){
-                return $query->where('patient_id', 'LIKE', $search);
+                return $query
+                        ->where('id', 'LIKE', $search)
+                        ->orWhere('description', 'LIKE', $search)
+                        ->orWhere('note', 'LIKE', $search)
+                        ->orWhere('patient_id', 'LIKE', $search);
             });
     }
 }

@@ -6,20 +6,27 @@ use App\Models\Appointment;
 use App\Models\Status;
 use App\Traits\WithFilters;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class AppointmentViewComponent extends Component
 {
-    use WithFilters;
+    use WithPagination, WithFilters;
 
+    protected $paginationTheme = 'bootstrap';
+    public $paginateValue = 10;
     public $status = '';
     public $byDate = '';
 
     protected $queryString = [
-        'search' => ['except' => '']
+        'search' => ['except' => ''],
+        'status' => ['except' => ''],
+        'byDate' => ['except' => '']
     ];
 
     protected $updatesQueryString = [
-        'search'
+        'search',
+        'status',
+        'byDate'
     ];
 
     public function render() 
@@ -29,19 +36,24 @@ class AppointmentViewComponent extends Component
         ]);
     }
 
-    public function getRowsProperty() 
-    { 
+    public function getRowsProperty() { return 
+        $this->rowsQuery->paginate($this->paginateValue);
+    }
+
+    public function getRowsQueryProperty()
+    {
         return Appointment::search($this->search)
-                ->with(['patient', 'patient.user', 'status', 'doctor', 'doctor.user'])
+                ->with(['patient.user', 'status', 'doctor', 'doctor.user'])
                 ->when(!empty($this->status), 
                     fn ($query) => $query->where('status_id', $this->status))
                 ->when(!empty($this->byDate), 
-                    fn ($query) => $query->whereDate('scheduled_at', $this->byDate, now()))
-                ->orderBy('scheduled_at', 'ASC')
-                ->get();
+                    fn ($query) => $query->whereDate('scheduled_at', $this->byDate == 'today' ? '=' : '>', now()))
+                ->orderBy('scheduled_at', 'ASC');
     }
 
     public function getStatusesProperty(){ return
         Status::get();
     }
+
+    public function updatedPaginateValue() { $this->resetPage(); }
 }

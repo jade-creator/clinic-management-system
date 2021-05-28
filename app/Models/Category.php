@@ -24,7 +24,10 @@ class Category extends Model
 
         return empty($search) ? static::query()
             : static::where(function ($query) use ($search){
-                return $query->where('category', 'LIKE', $search);
+                return $query
+                        ->where('id', 'LIKE', $search)
+                        ->orWhere('name', 'LIKE', $search)
+                        ->orWhere('description', 'LIKE', $search);
             });
     }
 }
