@@ -35,12 +35,36 @@ class StockViewComponent extends Component
     public function getRowsQueryProperty()
     {
         return Stock::search($this->search)
-                ->when(!empty($this->search), function($query) {
-                    return $query->orWhereHas('treatment', function($query) {
-                            return $query->where('name', 'LIKE', '%'.$this->search.'%');
-                    });
-                })
-                ->latest();
+                    ->select(['id', 'quantity', 'updated_at', 'treatment_id'])
+                    ->with('treatment:id,name')
+                    ->when(!empty($this->search), function($query) {
+                        return $query->orWhereHas('treatment', function($query) {
+                                return $query->where('name', 'LIKE', '%'.$this->search.'%');
+                        });
+                    })
+                    ->latest();
+    }
+
+    public function restore(int $stock_id)
+    {
+        $stock = Stock::withTrashed()->find($stock_id);
+
+        if ($stock && $stock->trashed()) {
+            $stock->restore();
+        } else {
+            abort(404);
+        }
+
+        session()->flash('message', 'Stock restored successfully.');
+        return redirect(route('stocks.view'));
+    }
+
+    public function destroy(Stock $stock)
+    {
+        $stock->delete();
+
+        session()->flash('message', 'Stock deleted successfully. <a href="'.route('stocks.restore', $stock->id).'">Ooops! Undo</a>');
+        return redirect(route('stocks.view'));
     }
 
     public function updatedPaginateValue() { $this->resetPage(); }

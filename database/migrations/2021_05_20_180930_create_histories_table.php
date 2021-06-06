@@ -20,6 +20,7 @@ class CreateHistoriesTable extends Migration
             $table->mediumText('note');
             $table->timestamps();
             $table->foreignId('patient_id')->constrained();
+            $table->softDeletes();
         });
     }
 

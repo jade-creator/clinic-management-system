@@ -20,6 +20,7 @@ class CreateDocumentsTable extends Migration
             $table->string('name')->nullable();
             $table->timestamps();
             $table->foreignId('patient_id')->constrained();
+            $table->softDeletes();
         });
     }
 

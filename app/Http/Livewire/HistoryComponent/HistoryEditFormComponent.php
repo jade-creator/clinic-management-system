@@ -4,8 +4,8 @@ namespace App\Http\Livewire\HistoryComponent;
 
 use App\Models\History;
 use App\Models\Patient;
+use Carbon\Carbon;
 use Livewire\Component;
-
 class HistoryEditFormComponent extends Component
 {
     public History $history;
@@ -17,7 +17,7 @@ class HistoryEditFormComponent extends Component
 
     public function mount()
     {
-        $this->fill([ 'patient_name' => $this->history->patient_id ]);
+        $this->fill([ 'patient_name' => $this->history->patient_id ]); 
     }
 
     public function rules() {
@@ -32,8 +32,10 @@ class HistoryEditFormComponent extends Component
     public function update()
     {
         $this->validate();
-
         $this->history->update();
+
+        session()->flash('message', 'History updated successfully.');
+        return redirect(route('histories.view'));
     }
 
     public function updatedHistoryPatientId($value)
@@ -47,6 +49,6 @@ class HistoryEditFormComponent extends Component
     }
 
     public function getPatientsProperty() { return
-        Patient::with('user')->get();
+        Patient::with('user:id,name')->get(['id','user_id']);
     }
 }

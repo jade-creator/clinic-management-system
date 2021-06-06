@@ -16,11 +16,7 @@ class AppointmentEditFormComponent extends Component
     public $doctor_name;
 
     public function render() { return 
-        view('livewire.appointment-component.appointment-edit-form-component', [
-            'patients' => $this->patients,
-            'doctors' => $this->doctors,
-            'statuses' => $this->statuses,
-        ]);
+        view('livewire.appointment-component.appointment-edit-form-component');
     }
 
     public function mount()
@@ -35,7 +31,7 @@ class AppointmentEditFormComponent extends Component
     public function rules()
     {
         return [
-            'appointment.scheduled_at' => ['required', 'date', 'after:today'],
+            'appointment.scheduled_at' => ['required', 'date'],
             'appointment.remarks' => ['nullable', 'string'],
             'appointment.patient_id' => ['required', 'integer'],
             'appointment.doctor_id' => ['required', 'integer'],
@@ -47,6 +43,9 @@ class AppointmentEditFormComponent extends Component
     {
         $this->validate();
         $this->appointment->update();
+
+        session()->flash('message', 'Appointment updated successfully.');
+        return redirect(route('appointments.view'));
     }
 
     public function updatedAppointmentPatientId() { return
@@ -74,7 +73,7 @@ class AppointmentEditFormComponent extends Component
     }
 
     public function getStatusesProperty() { return
-        Status::get();
+        Status::get(['id', 'name']);
     }
 
     public function hydrate()

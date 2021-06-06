@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,6 +17,10 @@ class Payment extends Model
         'grand_total',
         'patient_id',
     ];
+
+    public function getCreatedAtAttribute($value) { return
+        Carbon::parse($value)->format('Y-m-d g:ia');
+    }
 
     public function patient() { return
         $this->belongsTo(Patient::class);

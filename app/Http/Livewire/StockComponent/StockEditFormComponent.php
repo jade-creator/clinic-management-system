@@ -8,11 +8,9 @@ use Livewire\Component;
 
 class StockEditFormComponent extends Component
 {
-    public $stockId;
-    public $treatmentId;
-    public $treatmentName;
-    public $quantity;
-
+    public Stock $stock;
+    public $treatment_name;
+    
     public function render() { return 
         view('livewire.stock-component.stock-edit-form-component', [
             'treatments' => $this->rows
@@ -22,31 +20,42 @@ class StockEditFormComponent extends Component
     public function rules()
     {
         return [
-            'quantity' => ['required', 'integer'],
-            'treatmentId' => ['required', 'integer']
+            'stock.quantity' => ['required', 'integer'],
+            'stock.treatment_id' => ['required', 'integer', 'unique:stocks,treatment_id']
         ];
     }
 
-    public function mount(Stock $stock)
+    public function messages()
     {
-        $this->fill([
-            $this->stockId = $stock->id,
-            $this->treatmentId = $stock->treatment->id,
-            $this->treatmentName = $stock->treatment->id,
-            $this->quantity = $stock->quantity,
-        ]);
+        return [
+            'stock.treatment_id.unique' => 'Treatment is already in stock.',
+        ];
+    }
+
+    public function hydrate()
+    {
+        $this->resetErrorBag();
+        $this->resetValidation();
     }
 
     public function update()
     {
         $this->validate();
-        Stock::where('id', $this->stockId)->update([
-            'quantity' => $this->quantity,
-            'treatment_id' => $this->treatmentId
-        ]);
+        $this->stock->update();
+
+        session()->flash('message', 'Stock updated successfully.');
+        return redirect(route('stocks.view'));
     }
 
     public function getRowsProperty() { return
         Treatment::get(['id', 'name']);
+    }
+
+    public function updatedStockTreatmentId() { return
+        $this->treatment_name = $this->stock->treatment_id;
+    }
+
+    public function updatedTreatmentName() { return
+        $this->stock->treatment_id = $this->treatment_name;
     }
 }

@@ -212,10 +212,11 @@
                                 <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-envelope-open"></use>
                             </svg></a></li>
                     <li class="c-header-nav-item dropdown">
-                        <a class="c-header-nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                        <a class="c-header-nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                             <div class="c-avatar">
-                                <img class="c-avatar-img" src="assets/img/avatars/6.jpg" alt="user@email.com"/>
+                                <img class="c-avatar-img" src="https://www.vippng.com/png/detail/416-4161690_empty-profile-picture-blank-avatar-image-circle.png" alt="avatar"/>
                             </div>
+                            <p class="pt-3 mx-1">{{ auth()->user()->name }}</p>
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right pt-0">
@@ -264,12 +265,18 @@
                                 Lock Account
                             </a>
                             
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
                                 <svg class="c-icon mr-2">
                                     <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-account-logout"></use>
                                 </svg> 
                                 Logout
                             </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
                         </div>
                     </li>
                 </ul>

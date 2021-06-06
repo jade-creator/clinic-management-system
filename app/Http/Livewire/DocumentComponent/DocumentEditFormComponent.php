@@ -18,12 +18,13 @@ class DocumentEditFormComponent extends Component
 
     public function mount() 
     {
-        $this->document_file = $this->document->name ? $this->document->name : 'N/A';
+        $this->document_file = $this->document->name ? $this->document->name : 'file attached';
     }
 
     public function rules() {
         return [
             'document.date' => ['required', 'date'],
+            'document.patient_id' => ['required', 'integer'],
             'document.description' => ['required', 'string']
         ];
     }
@@ -31,9 +32,13 @@ class DocumentEditFormComponent extends Component
     public function update() 
     {
         $this->validate();
+        $this->document->update();
+
+        session()->flash('message', 'Document updated successfully.');
+        return redirect(route('documents.view'));
     }
 
     public function getPatientsProperty() { return
-        Patient::with('user')->get();
+        Patient::with('user:id,name')->get(['id', 'user_id']);
     }
 }

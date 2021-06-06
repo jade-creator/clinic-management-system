@@ -47,6 +47,9 @@ class DocumentAddFormComponent extends Component
             $this->document_file->storeAs('documents', $document->patient_id . '/' . $document_file);
             $document->update([ 'name' => $document_file ]);
         }
+
+        session()->flash('message', 'Document created successfully.');
+        return redirect(route('documents.view'));
     }
 
     public function updatedDocumentPatientId($value)
@@ -60,6 +63,6 @@ class DocumentAddFormComponent extends Component
     }
 
     public function getPatientsProperty() { return
-        Patient::with('user')->get();
+        Patient::with('user:id,name')->get(['id', 'user_id']);
     }
 }

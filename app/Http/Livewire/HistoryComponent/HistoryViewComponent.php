@@ -35,10 +35,39 @@ class HistoryViewComponent extends Component
     public function getRowsQueryProperty()
     {
         return History::search($this->search)
-                ->orWhereHas('patient.user', function($query) {
-                    return $query->where('name', 'LIKE', '%'.$this->search.'%');
+                ->select(['id', 'date', 'description', 'note', 'updated_at', 'patient_id'])
+                ->with([
+                    'patient:id,user_id',
+                    'patient.user:id,name'
+                ])
+                ->when(!empty($this->search), function($query) {
+                    return $query->orWhereHas('patient.user', function($query) {
+                        return $query->where('name', 'LIKE', '%'.$this->search.'%');
+                    });
                 })
                 ->latest();
+    }
+
+    public function restore(int $history_id)
+    {
+        $history = History::withTrashed()->find($history_id);
+
+        if ($history && $history->trashed()) {
+            $history->restore();
+        } else {
+            abort(404);
+        }
+
+        session()->flash('message', 'History restored successfully.');
+        return redirect(route('histories.view'));
+    }
+
+    public function destroy(History $history)
+    {
+        $history->delete();
+
+        session()->flash('message', 'History deleted successfully. <a href="'.route('histories.restore', $history->id).'">Ooops! Undo</a>');
+        return redirect(route('histories.view'));
     }
 
     public function updatedPaginateValue() { $this->resetPage(); }

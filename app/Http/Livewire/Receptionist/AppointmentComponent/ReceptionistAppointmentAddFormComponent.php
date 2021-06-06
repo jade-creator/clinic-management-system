@@ -15,11 +15,7 @@ class ReceptionistAppointmentAddFormComponent extends Component
     public $doctor_name;
 
     public function render() { return 
-        view('livewire.receptionist.appointment-component.receptionist-appointment-add-form-component', [
-            'patients' => $this->patients,
-            'doctors' => $this->doctors,
-            'statuses' => $this->statuses,
-        ]);
+        view('livewire.receptionist.appointment-component.receptionist-appointment-add-form-component');
     }
 
     public function mount()
@@ -42,6 +38,9 @@ class ReceptionistAppointmentAddFormComponent extends Component
     {
         $this->validate();
         $this->appointment->save();
+
+        session()->flash('message', 'Appointment created successfully.');
+        return redirect(route('appointments.view'));
     }
 
     public function updatedAppointmentPatientId() { return
@@ -69,7 +68,7 @@ class ReceptionistAppointmentAddFormComponent extends Component
     }
 
     public function getStatusesProperty() { return
-        Status::get();
+        Status::get(['id', 'name']);
     }
 
     public function hydrate()

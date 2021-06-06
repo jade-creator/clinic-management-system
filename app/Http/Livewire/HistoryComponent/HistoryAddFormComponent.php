@@ -31,8 +31,10 @@ class HistoryAddFormComponent extends Component
     public function create()    
     {
         $this->validate();
-
         $this->history->save();
+
+        session()->flash('message', 'History created successfully.');
+        return redirect(route('histories.view'));
     }
 
     public function updatedHistoryPatientId($value)
@@ -46,6 +48,6 @@ class HistoryAddFormComponent extends Component
     }
 
     public function getPatientsProperty() { return
-        Patient::with('user')->get();
+        Patient::with('user:id,name')->get(['id','user_id']);
     }
 }

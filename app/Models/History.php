@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class History extends Model
-{
-    use HasFactory;
+{   
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'date',
@@ -26,8 +28,7 @@ class History extends Model
 
         return empty($search) ? static::query()
             : static::where(function ($query) use ($search){
-                return $query
-                        ->where('id', 'LIKE', $search)
+                return $query->where('id', 'LIKE', $search)
                         ->orWhere('description', 'LIKE', $search)
                         ->orWhere('note', 'LIKE', $search)
                         ->orWhere('patient_id', 'LIKE', $search);

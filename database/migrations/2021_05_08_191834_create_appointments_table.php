@@ -18,9 +18,10 @@ class CreateAppointmentsTable extends Migration
             $table->dateTime('scheduled_at');
             $table->mediumText('remarks')->nullable();
             $table->timestamps();
-            $table->foreignId('patient_id')->onDelete('cascade')->constrained();
-            $table->foreignId('doctor_id')->nullable()->onDelete('cascade')->constrained();
-            $table->foreignId('status_id')->default(1)->onDelete('cascade')->constrained();
+            $table->foreignId('patient_id')->constrained();
+            $table->foreignId('doctor_id')->nullable()->constrained();
+            $table->foreignId('status_id')->default(1)->constrained();
+            $table->softDeletes();
         });
     }
 

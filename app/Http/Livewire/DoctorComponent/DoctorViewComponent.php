@@ -34,15 +34,19 @@ class DoctorViewComponent extends Component
 
     public function getRowsQueryProperty()
     {
-        return Doctor::whereHas('user', function($query) {
-                    return $query
-                            ->where('id', 'LIKE', '%'.$this->search.'%')
-                            ->orWhere('name', 'LIKE', '%'.$this->search.'%');
-                })
+        return Doctor::select(['id', 'user_id'])
                 ->with([
-                    'appointments' => fn($query) => $query->where('status_id', 4),
-                    'prescriptions' 
+                    'user:id,name',
+                    'prescriptions:id,doctor_id',
+                    'appointments' => fn($query) => $query->select(['id','doctor_id','status_id'])
+                                                        ->where('status_id', 4)
                 ])
+                ->when(!empty($this->search), function($query) {
+                    return $query->whereHas('user', function($query) {
+                        return $query->where('id', 'LIKE', '%'.$this->search.'%')
+                                ->orWhere('name', 'LIKE', '%'.$this->search.'%');
+                    });
+                })
                 ->latest();
     }
 

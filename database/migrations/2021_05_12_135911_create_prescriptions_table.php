@@ -18,8 +18,9 @@ class CreatePrescriptionsTable extends Migration
             $table->mediumText('medication');
             $table->mediumText('note');
             $table->timestamps();
-            $table->foreignId('patient_id')->onDelete('cascade')->constrained();
-            $table->foreignId('doctor_id')->nullable()->onDelete('cascade')->constrained();
+            $table->foreignId('patient_id')->constrained();
+            $table->foreignId('doctor_id')->nullable()->constrained();
+            $table->softDeletes();
         });
     }
 

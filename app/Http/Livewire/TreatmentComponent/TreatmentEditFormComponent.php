@@ -26,12 +26,15 @@ class TreatmentEditFormComponent extends Component
     }
 
     public function getCategoriesProperty() { return
-        Category::get(['id', 'category']);
+        Category::get(['id', 'name']);
     }
 
     public function create()
     {
         $this->validate();
         $this->treatment->update();
+
+        session()->flash('message', 'Treatment updated successfully.');
+        return redirect(route('treatments.view'));
     }
 }
