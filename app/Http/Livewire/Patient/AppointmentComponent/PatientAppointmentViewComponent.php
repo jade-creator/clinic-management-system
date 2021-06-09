@@ -44,7 +44,9 @@ class PatientAppointmentViewComponent extends Component
     {
         $user = Auth::user()->load('patient:id,user_id');
         $patientId = $user->patient->id;
+        
         return Appointment::search($this->search)
+                    ->select(['id', 'scheduled_at', 'remarks', 'updated_at', 'patient_id', 'doctor_id', 'status_id'])
                     ->where('patient_id', $patientId)
                     ->when(!empty($this->search), function($query) {
                         return $query->orWhereHas('doctor.user', function($query) {
@@ -55,8 +57,7 @@ class PatientAppointmentViewComponent extends Component
                     ->when(!empty($this->status), 
                         fn ($query) => $query->where('status_id', $this->status))
                     ->when(!empty($this->byDate), 
-                        fn ($query) => $query->whereDate('scheduled_at', $this->byDate == 'today' ? '=' : '>', now()))
-                    ->orderBy('scheduled_at', 'DESC');
+                        fn ($query) => $query->whereDate('scheduled_at', $this->byDate == 'today' ? '=' : '>', now()));
     }
 
     public function getStatusesProperty(){ return
