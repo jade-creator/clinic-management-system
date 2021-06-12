@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\Livewire\DepositComponent;
+namespace App\Http\Livewire\PaymentComponent;
 
 use App\Models\Deposit;
 use App\Models\Payment;
 use Livewire\Component;
 
-class DepositAddFormComponent extends Component
+class PaymentAddDepositFormComponent extends Component
 {
     public Deposit $deposit;
+    public $paymentId;
     public $grand_total;
     public $due;
 
@@ -23,14 +24,17 @@ class DepositAddFormComponent extends Component
         ];
     }
 
-    public function render() { return 
-        view('livewire.deposit-component.deposit-add-form-component');
+    public function mount()
+    {
+        $this->fill([ 
+            'deposit' => new Deposit(),
+            'deposit.payment_id' => $this->paymentId 
+        ]);
+        $this->updatedDepositPaymentId($this->paymentId);
     }
 
-    public function mount() {
-        $this->fill([
-            'deposit' => new Deposit()
-        ]);
+    public function render() { return 
+        view('livewire.payment-component.payment-add-deposit-form-component');
     }
 
     public function create() 
@@ -60,5 +64,5 @@ class DepositAddFormComponent extends Component
             'grand_total' => $payment->grand_total,
             'due' => $payment->due
         ]);
-    }           
+    }    
 }

@@ -1,8 +1,13 @@
 <x-table title="Payments" placeholder="Sample">
     <x-slot name="button">
-        <a href="{{ route('payments.add') }}">
-            <button class="btn btn-primary">Add Payment</button>
-        </a>
+        <div>
+            <a href="{{ route('payments.add') }}">
+                <button class="btn btn-primary">Add Payment</button>
+            </a>
+            <a href="{{ route('deposits.add') }}">
+                <button class="btn btn-light border-secondary">Deposit</button>
+            </a>
+        </div>
     </x-slot>
 
     <x-slot name="filter">
@@ -22,6 +27,7 @@
                     <th class="text-center" scope="col">Grand Total</th>
                     <th class="text-center" scope="col">Paid Amount</th>
                     <th class="text-center" scope="col">Due</th>
+                    <th class="text-center" scope="col">Option</th>
                 </tr>
             </thead>
             <tbody>
@@ -37,6 +43,20 @@
                         <td class="text-center">{{ $payment->grand_total  }}</td>
                         <td class="text-center">{{ $payment->deposits->sum('amount_deposit')  }}</td>
                         <td class="text-center">{{ $payment->due  }}</td>
+                        <td class="text-center">
+                            <a href="{{ route('payments.deposit.add', $payment->id) }}">
+                                <button class="btn text-secondary rounded-circle p-1 mx-1" data-toggle="tooltip" data-placement="top" title="Deposit">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <rect x="3" y="5" width="18" height="14" rx="3"></rect>
+                                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                                        <line x1="7" y1="15" x2="7.01" y2="15"></line>
+                                        <line x1="11" y1="15" x2="13" y2="15"></line>
+                                     </svg>
+                                </button>
+                            </a>
+                        </td>
+
                     </tr>
                 @empty
                     <tr>

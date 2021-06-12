@@ -22,19 +22,7 @@
         <div class="form-row">
             <div class="form-group col">
                 <label for="payment_id">Payment ID</label>
-                <select class="form-control @error('payment.id') is-invalid @enderror" id="payment_id" name="payment_id" required autofocus wire:model="deposit.payment_id" wire:loading.attr="disabled">
-                    <option value="">-- choose a payment id--</option>
-                    @forelse ($this->payments as $payment)
-                        <option value="{{ $payment->id }}">{{ $payment->id }}</option>
-                    @empty
-                        <option value="">No records</option>
-                    @endforelse
-                </select>
-                @error('payment.id')
-                    <div class="invalid-feedback">
-                        {{$message}}
-                    </div>
-                @enderror
+                <input readonly type="number" class="form-control" id="payment_id" name="payment_id" wire:model="deposit.payment_id">
             </div>
             <div class="form-group col">
                 <label for="date_deposit">Date</label>
