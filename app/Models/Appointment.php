@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -31,10 +30,6 @@ class Appointment extends Model
         $this->belongsTo(Status::class);
     }
 
-    // public function getScheduledAtAttribute($value) { return
-    //     Carbon::parse($value)->format('d/m/Y g:ia');
-    // }
-
     public static function search($search)
     {
         $search = '%'.$search.'%';
@@ -42,9 +37,9 @@ class Appointment extends Model
         return empty($search) ? static::query()
             : static::where(function ($query) use ($search){
                 return $query
-                        ->where('patient_id', 'LIKE', $search)
-                        ->orWhere('doctor_id', 'LIKE', $search)
-                        ->orWhere('remarks', 'LIKE', $search);
+                        ->where('patient_id', 'LIKE', '%'.$search.'%')
+                        ->orWhere('doctor_id', 'LIKE', '%'.$search.'%')
+                        ->orWhere('remarks', 'LIKE', '%'.$search.'%');
             });
     }
 }

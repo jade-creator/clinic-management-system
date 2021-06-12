@@ -34,8 +34,16 @@ class PaymentViewComponent extends Component
 
     public function getRowsQueryProperty()
     {
-        return Payment::with('patient.user')
-                 ->latest();
+        return Payment::search($this->search)
+                ->with('patient.user')
+                ->when(!empty($this->search), function($query) {
+                    return $query
+                        ->orWhere('patient_id', 'LIKE', '%'.$this->search.'%')
+                        ->orWhereHas('patient.user', function($query) {
+                            return $query->where('name', 'LIKE', '%'.$this->search.'%');
+                        });
+                })
+                ->latest();
     }
 
     public function updatedPaginateValue() { $this->resetPage(); }

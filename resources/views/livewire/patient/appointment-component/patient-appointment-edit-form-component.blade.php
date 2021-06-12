@@ -18,15 +18,20 @@
             </a>
         </div>
     </div>
+
+    <div>
+        <p>Last Updated: {{ $this->appointment->updated_at->diffForHumans() }}</p>
+    </div>
+
     <form method="post" wire:submit.prevent="create">
         <div class="form-group">
             <label for="name">My Name</label>
-            <input type="text" disabled class="form-control" id="name" name="name" required autofocus wire:model.defer="patientName">
+            <input wire:model.defer="patientName" disabled type="text" class="form-control" id="name" name="name">
         </div>
         <div class="form-row">
             <div class="form-group col">
                 <label for="schedule">Schedule</label>
-                <input type="datetime-local"  class="form-control @error('appointment.scheduled_at') is-invalid @enderror" id="schedule" name="schedule" required autofocus wire:model.defer="appointment.scheduled_at" wire:loading.attr="disabled">
+                <input type="datetime-local" class="form-control @error('appointment.scheduled_at') is-invalid @enderror" id="schedule" name="schedule" required autofocus wire:model.defer="appointment.scheduled_at" wire:loading.attr="disabled">
                 @error('appointment.scheduled_at')
                     <div class="invalid-feedback">
                         {{$message}}
@@ -36,13 +41,7 @@
             <div class="form-group col">
                 <label for="status_id">Status</label>
                 <select id="status_id" name="status_id" class="form-control @error('appointment.status_id') is-invalid @enderror" required autofocus wire:model.defer="appointment.status_id" wire:loading.attr="disabled">
-                    @forelse ($this->statuses as $status)
-                        @if ($loop->first)
-                            <option value="{{ $status->id }}" selected>{{ $status->name }}</option>
-                        @endif
-                    @empty
-                        <option value="">No records</option>
-                    @endforelse
+                    <option value="{{ $status->id }}">{{ $status->name }}</option>
                 </select>
                 @error('appointment.status_id')
                     <div class="invalid-feedback">
@@ -62,7 +61,7 @@
         </div>
         @if (auth()->user()->role->name == 'patient')
             <div class="form-group text-right">
-                <button class="btn px-5 btn-primary" type="submit" wire:loading.attr="disabled">Save</button>
+                <button class="btn px-5 btn-primary" type="submit" wire:loading.attr="disabled">Update</button>
             </div>
         @endif
     </form>
