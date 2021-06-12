@@ -16,7 +16,7 @@ class CategoryEditFormComponent extends Component
     public function rules()
     {
         return [
-            'category.category' => ['required', 'string', 'max:255'],
+            'category.name' => ['required', 'string', 'max:255'],
             'category.description' => ['required', 'string']
         ];
     }

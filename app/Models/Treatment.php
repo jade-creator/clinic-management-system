@@ -28,4 +28,18 @@ class Treatment extends Model
     public function payments() { return
         $this->belongsToMany(Payment::class);
     }
+
+    public static function search($search)
+    {
+        $search = '%'.$search.'%';
+
+        return empty($search) ? static::query()
+            : static::where(function ($query) use ($search){
+                return $query
+                        ->where('id', 'LIKE', $search)
+                        ->orWhere('name', 'LIKE', $search)
+                        ->orWhere('description', 'LIKE', $search)
+                        ->orWhere('category_id', 'LIKE', $search);
+            });
+    }
 }
