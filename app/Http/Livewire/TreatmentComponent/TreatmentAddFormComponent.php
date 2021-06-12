@@ -31,12 +31,15 @@ class TreatmentAddFormComponent extends Component
     }
 
     public function getCategoriesProperty() { return
-        Category::get(['id', 'category']);
+        Category::get(['id', 'name']);
     }
 
     public function create()
     {
         $this->validate();
         $this->treatment->save();
+
+        session()->flash('message', 'Treatment created successfully.');
+        return redirect(route('treatments.view'));
     }
 }

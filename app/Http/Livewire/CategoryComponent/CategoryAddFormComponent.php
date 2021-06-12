@@ -30,5 +30,8 @@ class CategoryAddFormComponent extends Component
     {
         $this->validate();
         $this->category->save();
+
+        session()->flash('message', 'Category created successfully.');
+        return redirect(route('categories.view'));
     }
 }

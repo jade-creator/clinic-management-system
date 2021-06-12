@@ -17,7 +17,8 @@ class CreateStocksTable extends Migration
             $table->id();
             $table->unsignedMediumInteger('quantity');
             $table->timestamps();
-            $table->foreignId('treatment_id')->unique()->onDelete('cascade')->constrained();
+            $table->foreignId('treatment_id')->unique()->constrained();
+            $table->softDeletes();
         });
     }
 

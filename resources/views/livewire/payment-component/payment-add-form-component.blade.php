@@ -32,8 +32,8 @@
                 @if ($this->items && $this->payment->patient_id)
                     <div class="form-group">
                         <label for="sub_total">Sub Total</label>
-                        <input type="number" class="form-control @error('payment.subtotal') is-invalid @enderror" name="subtotal" required readonly wire:model="payment.sub_total" wire:loading.attr="disabled">
-                        @error('payment.subtotal')
+                        <input type="number" class="form-control @error('payment.sub_total') is-invalid @enderror" name="subtotal" required readonly wire:model="payment.sub_total" wire:loading.attr="disabled">
+                        @error('payment.sub_total')
                             <div class="invalid-feedback">
                                 {{$message}}
                             </div>

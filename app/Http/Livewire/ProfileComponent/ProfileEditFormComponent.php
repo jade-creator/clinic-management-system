@@ -36,7 +36,7 @@ class ProfileEditFormComponent extends Component
 
         if($role == 'patient'){
             $this->status = $this->subEntity->isActive ? 'Active' : 'Inactive';
-            $this->note = $this->subEntity->note;
+            $this->note = $this->subEntity->note; //need update method
         }
     }
 

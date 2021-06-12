@@ -25,5 +25,8 @@ class CategoryEditFormComponent extends Component
     {
         $this->validate();
         $this->category->update();
+
+        session()->flash('message', 'Category updated successfully.');
+        return redirect(route('categories.view'));
     }
 }

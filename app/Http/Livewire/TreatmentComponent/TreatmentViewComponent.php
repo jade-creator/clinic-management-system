@@ -35,12 +35,41 @@ class TreatmentViewComponent extends Component
     public function getRowsQueryProperty()
     {
         return Treatment::search($this->search)
+                ->select(['id', 'name', 'description', 'purchase_price', 'selling_price', 'updated_at', 'category_id'])
+                ->with(['category:id,name', 'stock:id,treatment_id'])
                 ->when(!empty($this->search), function($query) {
                     return $query->orWhereHas('category', function($query) {
                             return $query->where('name', 'LIKE', '%'.$this->search.'%');
                     });
                 })
                 ->latest();
+    }
+
+    public function restore(int $treatment_id)
+    {
+        $treatment = Treatment::withTrashed()->find($treatment_id);
+
+        if ($treatment && $treatment->trashed()) {
+            $treatment->restore();
+        } else {
+            abort(404);
+        }
+
+        session()->flash('message', 'Treatment restored successfully.');
+        return redirect(route('treatments.view'));
+    }
+
+    public function destroy(Treatment $treatment)
+    {
+        if ($treatment->stock) {
+            session()->flash('danger', 'Cannot delete: this treatment has stock record');
+            return redirect(route('treatments.view'));
+        }
+
+        $treatment->delete();
+
+        session()->flash('message', 'Treatment deleted successfully. <a href="'.route('treatments.restore', $treatment->id).'">Ooops! Undo</a>');
+        return redirect(route('treatments.view'));
     }
 
     public function updatedPaginateValue() { $this->resetPage(); }

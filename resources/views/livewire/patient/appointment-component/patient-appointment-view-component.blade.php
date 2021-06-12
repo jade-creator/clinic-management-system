@@ -1,6 +1,6 @@
 <x-table title="Appointments" placeholder="Sample">
     <x-slot name="button">
-        <a href="{{ route('patient.appointment.add') }}">
+        <a href="{{ route('patient.appointments.add') }}">
             <button class="btn btn-primary">Add Appointment</button>
         </a>
     </x-slot>
@@ -21,6 +21,8 @@
             <option value="upcoming">Upcoming</option>   
         </select>
     </x-slot>
+
+    @include('partials.alerts')
 
     <div name="slot">
         <table class="table table-hover table-bordered table-light">

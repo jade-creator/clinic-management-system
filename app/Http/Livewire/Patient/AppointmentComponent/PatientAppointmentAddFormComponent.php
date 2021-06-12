@@ -19,10 +19,13 @@ class PatientAppointmentAddFormComponent extends Component
 
     public function mount() 
     { 
-        $this->appointment = new Appointment();
         $user = Auth::user()->load('patient:id,user_id');
-        $this->patientName = $user->name;
-        $this->patientId = $user->patient->id;
+
+        $this->fill([
+            'appointment' => new Appointment(),
+            'patientName' => $user->name,
+            'patientId' => $user->patient->id,
+        ]);
     }
 
     public function rules()
@@ -43,5 +46,8 @@ class PatientAppointmentAddFormComponent extends Component
         $this->validate();
         $this->appointment->patient_id = $this->patientId;
         $this->appointment->save();
+
+        session()->flash('message', 'Appointment created successfully.');
+        return redirect(route('patient.appointments.view'));
     }
 }

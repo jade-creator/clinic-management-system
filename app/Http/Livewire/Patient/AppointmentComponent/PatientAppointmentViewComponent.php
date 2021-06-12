@@ -44,25 +44,23 @@ class PatientAppointmentViewComponent extends Component
     {
         $user = Auth::user()->load('patient:id,user_id');
         $patientId = $user->patient->id;
-        $appointments = Appointment::search($this->search)
-                            ->where('patient_id', $patientId)
-                            ->when(!empty($this->search), function($query) {
-                                return $query->orWhereHas('doctor.user', function($query) {
-                                    return $query->where('name', 'LIKE', '%'.$this->search.'%');
-                                });
-                            })
-                            ->with('status')
-                            ->when(!empty($this->status), 
-                                fn ($query) => $query->where('status_id', $this->status))
-                            ->when(!empty($this->byDate), 
-                                fn ($query) => $query->whereDate('scheduled_at', $this->byDate == 'today' ? '=' : '>', now()))
-                            ->orderBy('scheduled_at', 'DESC');
-
-        return $appointments;
+        return Appointment::search($this->search)
+                    ->where('patient_id', $patientId)
+                    ->when(!empty($this->search), function($query) {
+                        return $query->orWhereHas('doctor.user', function($query) {
+                            return $query->where('name', 'LIKE', '%'.$this->search.'%');
+                        });
+                    })
+                    ->with('status:id,name')
+                    ->when(!empty($this->status), 
+                        fn ($query) => $query->where('status_id', $this->status))
+                    ->when(!empty($this->byDate), 
+                        fn ($query) => $query->whereDate('scheduled_at', $this->byDate == 'today' ? '=' : '>', now()))
+                    ->orderBy('scheduled_at', 'DESC');
     }
 
     public function getStatusesProperty(){ return
-        Status::get();
+        Status::get(['id', 'name']);
     }
 
     public function updatedPaginateValue() { $this->resetPage(); }

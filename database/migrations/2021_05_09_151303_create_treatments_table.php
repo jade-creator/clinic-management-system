@@ -20,6 +20,7 @@ class CreateTreatmentsTable extends Migration
             $table->double('purchase_price', 8, 2);
             $table->double('selling_price', 8, 2);
             $table->timestamps();
+            $table->softDeletes();
             $table->foreignId('category_id')->onDelete('cascade')->constrained();
         });
     }

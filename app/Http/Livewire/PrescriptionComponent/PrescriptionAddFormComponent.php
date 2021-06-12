@@ -13,9 +13,7 @@ class PrescriptionAddFormComponent extends Component
     public $patient_name;
     
     public function render() { return 
-        view('livewire.prescription-component.prescription-add-form-component', [
-            'patients' => $this->patients
-        ]);
+        view('livewire.prescription-component.prescription-add-form-component');
     }
 
     public function mount() {
@@ -34,6 +32,9 @@ class PrescriptionAddFormComponent extends Component
     public function create() {
         $this->validate();
         $this->prescription->save();
+
+        session()->flash('message', 'Prescription created successfully.');
+        return redirect(route('prescriptions.view'));
     }
 
     public function updatedPrescriptionPatientId() { return
@@ -45,7 +46,7 @@ class PrescriptionAddFormComponent extends Component
     }
 
     public function getPatientsProperty() { return
-        Patient::get();
+        Patient::with(['user:id,name'])->get(['id', 'user_id']);
     }
 
     public function getDoctorProperty()
