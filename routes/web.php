@@ -2,6 +2,7 @@
 
 use App\Http\Livewire\AppointmentComponent;
 use App\Http\Livewire\CategoryComponent;
+use App\Http\Livewire\DepositComponent;
 use App\Http\Livewire\Doctor\AppointmentComponent\DoctorAppointmentAddFormComponent;
 use App\Http\Livewire\DoctorComponent\DoctorViewComponent;
 use App\Http\Livewire\DocumentComponent;
@@ -105,6 +106,7 @@ Route::middleware('auth')->group( function() {
         //PAYMENTS
         Route::get('/payments/add', PaymentComponent\PaymentAddFormComponent::class)->name('payments.add');
         Route::get('/payments', PaymentComponent\PaymentViewComponent::class)->name('payments.view');
+        Route::get('/payments/{paymentId}/deposit/add', PaymentComponent\PaymentAddDepositFormComponent::class)->name('payments.deposit.add');
 
         //PATIENTS
         Route::get('/patients', PatientViewComponent::class)->name('patients.view');
@@ -124,6 +126,8 @@ Route::middleware('auth')->group( function() {
         //DOCTORS
         Route::get('/doctors', DoctorViewComponent::class)->name('doctors.view');
         
+        //DEPOSITS
+        Route::get('/deposits/add', DepositComponent\DepositAddFormComponent::class)->name('deposits.add');
     });
 
     Route::middleware('role:doctor|admin')->group( function() {

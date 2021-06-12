@@ -3,7 +3,6 @@
 namespace App\Http\Livewire\CategoryComponent;
 
 use App\Models\Category;
-use App\Models\Treatment;
 use App\Traits\WithFilters;
 use Livewire\Component;
 use Livewire\WithPagination;

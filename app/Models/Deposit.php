@@ -19,4 +19,14 @@ class Deposit extends Model
     public function payment() { return
         $this->belongsTo(Payment::class);
     }
+
+    public static function search($search)
+    {
+        $search = '%'.$search.'%';
+
+        return empty($search) ? static::query()
+            : static::where(function ($query) use ($search){
+                return $query->where('id', 'LIKE', '%'.$search.'%');
+            });
+    }
 }
