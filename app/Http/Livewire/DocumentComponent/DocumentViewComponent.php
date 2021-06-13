@@ -11,6 +11,8 @@ class DocumentViewComponent extends Component
 {
     use WithPagination, WithFilters;
 
+    protected $listeners = ['download'];
+
     protected $paginationTheme = 'bootstrap';
     public $paginateValue = 10;
 
@@ -68,6 +70,17 @@ class DocumentViewComponent extends Component
 
         session()->flash('message', 'Document deleted successfully. <a href="'.route('documents.restore', $document->id).'">Ooops! Undo</a>');
         return redirect(route('documents.view'));
+    }
+
+    public function downloadFileConfirm($path, $fileName) 
+    {
+        $this->dispatchBrowserEvent('swal:download', [ 
+            'type' => 'warning',
+            'title' => 'Are you sure?',
+            'text' => 'Please confirm to download the file',
+            'path' => $path,
+            'fileName' => $fileName,
+        ]);
     }
 
     public function download($path, $fileName) 
