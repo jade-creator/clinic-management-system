@@ -47,7 +47,7 @@ class CategoryViewComponent extends Component
         if ($category && $category->trashed()) {
             $category->restore();
         } else {
-            abort(404);
+            abort(403);
         }
 
         session()->flash('message', 'Category restored successfully.');

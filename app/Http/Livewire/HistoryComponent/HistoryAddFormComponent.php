@@ -31,9 +31,13 @@ class HistoryAddFormComponent extends Component
     public function create()    
     {
         $this->validate();
-        $this->history->save();
-
-        session()->flash('message', 'History created successfully.');
+        
+        try {
+            $this->history->save();
+            session()->flash('message', 'History created successfully.');
+        } catch (\Exception $e) {
+            session()->flash('danger', 'Creating history failed.');
+        }
         return redirect(route('histories.view'));
     }
 

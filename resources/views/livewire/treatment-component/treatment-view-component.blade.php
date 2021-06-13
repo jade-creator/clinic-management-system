@@ -1,42 +1,40 @@
-<x-table title="Treatments" placeholder="Sample">
-    <x-slot name="button">
-        <a href="{{ route('treatments.add') }}">
-            <button class="btn btn-primary">Add Treatment</button>
-        </a>
-    </x-slot>
+<div class="px-3 px-sm-4">
+    <x-table title="Treatments" placeholder="ID, name">
+        <x-slot name="button">
+            <a href="{{ route('treatments.add') }}">
+                <button class="btn btn-primary">Add Treatment</button>
+            </a>
+        </x-slot>
 
-    <x-slot name="filter">
-    </x-slot>
+        <x-slot name="filter">
+        </x-slot>
 
-    @include('partials.alerts')
+        @include('partials.alerts')
 
-    <div name="slot">
-        <table class="table table-hover table-bordered table-light">
-            <thead>
-                <tr>
-                    <th class="text-left" scope="col">ID</th>
-                    <th class="text-left" scope="col">Name</th>
-                    <th class="text-left" scope="col">Description</th>
-                    <th class="text-center" scope="col">Purchase Price</th>
-                    <th class="text-center" scope="col">Selling Price</th>
-                    <th class="text-center" scope="col">Category ID</th>
-                    <th class="text-left" scope="col">Category Name</th>
-                    @if (auth()->user()->role->name !== 'patient')
-                        <th class="text-left" scope="col">Option</th>
-                    @endif
-                </tr>
-            </thead>
-            <tbody>
-                @forelse ($treatments as $treatment)
+        <div name="slot">
+            <table class="table table-hover table-bordered table-light">
+                <thead>
                     <tr>
-                        <td class="text-left" scope="row">{{ $treatment->id }}</td>
-                        <td class="text-left">{{ $treatment->name }}</td>
-                        <td class="text-left">{{ $treatment->description }}</td>
-                        <td class="text-center">{{ $treatment->purchase_price }}</td>
-                        <td class="text-center">{{ $treatment->selling_price }}</td>
-                        <td class="text-center">{{ $treatment->category->id }}</td>
-                        <td class="text-left">{{ $treatment->category->name }}</td>
-                        @if (auth()->user()->role->name !== 'patient')
+                        <th class="text-left" scope="col">ID</th>
+                        <th class="text-left" scope="col">Name</th>
+                        <th class="text-left" scope="col">Description</th>
+                        <th class="text-center" scope="col">Purchase Price</th>
+                        <th class="text-center" scope="col">Selling Price</th>
+                        <th class="text-center" scope="col">Category ID</th>
+                        <th class="text-left" scope="col">Category Name</th>
+                        <th class="text-left" scope="col">Option</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse ($treatments as $treatment)
+                        <tr>
+                            <td class="text-left" scope="row">{{ $treatment->id }}</td>
+                            <td class="text-left">{{ $treatment->name }}</td>
+                            <td class="text-left">{{ $treatment->description }}</td>
+                            <td class="text-center">{{ $treatment->purchase_price }}</td>
+                            <td class="text-center">{{ $treatment->selling_price }}</td>
+                            <td class="text-center">{{ $treatment->category->id }}</td>
+                            <td class="text-left">{{ $treatment->category->name }}</td>
                             <td class="text-left">
                                 <a class="text-decoration-none" href="{{ route('treatments.edit', $treatment) }}">
                                     <button class="btn text-success rounded-circle p-1 mx-1" data-toggle="tooltip" data-placement="top" title="Details">
@@ -60,18 +58,18 @@
                                     </button>
                                 @endif
                             </td>
-                        @endif
-                    </tr>
-                @empty
-                    <tr>
-                        <td scope="row" colspan="8" class="text-center">No treatments found.</td>
-                    </tr>
-                @endforelse
-            </tbody>
-        </table>
-        
-        <div>
-             {{ $treatments->links('pagination::bootstrap-4') }}
+                        </tr>
+                    @empty
+                        <tr>
+                            <td scope="row" colspan="8" class="text-center">No treatments found.</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+            
+            <div>
+                {{ $treatments->links('pagination::bootstrap-4') }}
+            </div>
         </div>
-    </div>
-</x-table>
+    </x-table>
+</div>

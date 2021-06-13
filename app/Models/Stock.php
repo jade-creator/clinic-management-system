@@ -18,15 +18,4 @@ class Stock extends Model
     public function treatment() { return
         $this->belongsTo(Treatment::class);
     }
-
-    public static function search($search)
-    {
-        $search = '%'.$search.'%';
-
-        return empty($search) ? static::query()
-            : static::where(function ($query) use ($search){
-                return $query
-                        ->where('id', 'LIKE', $search);
-            });
-    }
 }

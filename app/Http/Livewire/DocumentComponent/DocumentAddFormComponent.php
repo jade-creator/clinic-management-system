@@ -36,19 +36,24 @@ class DocumentAddFormComponent extends Component
     {
         $this->validate();  
 
-        $document = Document::create([
-            'date' => $this->document->date,
-            'description' => $this->document->description,
-            'patient_id' => $this->document->patient_id
-        ]);
-
-        if ($this->document_file) {
-            $document_file = $this->document_file->getClientOriginalName();
-            $this->document_file->storeAs('documents', $document->patient_id . '/' . $document_file);
-            $document->update([ 'name' => $document_file ]);
+        try {
+            $document = Document::create([
+                'date' => $this->document->date,
+                'description' => $this->document->description,
+                'patient_id' => $this->document->patient_id
+            ]);
+    
+            if ($this->document_file) {
+                $document_file = $this->document_file->getClientOriginalName();
+                $this->document_file->storeAs('documents', $document->patient_id . '/' . $document_file);
+                $document->update([ 'name' => $document_file ]);
+            }
+    
+            session()->flash('message', 'Document created successfully.');
+        } catch (\Exception $e) {
+            session()->flash('danger', 'Creating document failed.');
         }
 
-        session()->flash('message', 'Document created successfully.');
         return redirect(route('documents.view'));
     }
 

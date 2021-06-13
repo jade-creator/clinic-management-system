@@ -35,9 +35,14 @@ class PrescriptionEditFormComponent extends Component
 
     public function create() {
         $this->validate();
-        $this->prescription->update();
+        
+        try {
+            $this->prescription->update();
+            session()->flash('message', 'Prescription updated successfully.');
+        } catch (\Exception $e) {
+            session()->flash('message', 'Updating prescription failed.');
+        }
 
-        session()->flash('message', 'Prescription updated successfully.');
         return redirect(route('prescriptions.view'));
     }
 

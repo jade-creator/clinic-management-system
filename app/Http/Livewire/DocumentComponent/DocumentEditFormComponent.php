@@ -32,9 +32,14 @@ class DocumentEditFormComponent extends Component
     public function update() 
     {
         $this->validate();
-        $this->document->update();
-
-        session()->flash('message', 'Document updated successfully.');
+       
+        try {
+            $this->document->update();
+            session()->flash('message', 'Document updated successfully.');
+        } catch (\Exception $e) {
+            session()->flash('danger', 'Updating document failed.');
+        }
+        
         return redirect(route('documents.view'));
     }
 

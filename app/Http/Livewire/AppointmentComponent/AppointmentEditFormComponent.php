@@ -7,6 +7,7 @@ use App\Models\Doctor;
 use App\Models\Patient;
 use App\Models\Status;
 use Carbon\Carbon;
+use Exception;
 use Livewire\Component;
 
 class AppointmentEditFormComponent extends Component
@@ -22,7 +23,7 @@ class AppointmentEditFormComponent extends Component
     public function mount()
     {
         $this->fill([
-            'patient_name' => $this->appointment->patient_id,
+            'patient_name' => $this->appointment->patient_id ?? '',
             'doctor_name' => $this->appointment->doctor_id ?? '',
             'appointment.scheduled_at' => Carbon::parse($this->appointment->scheduled_at)->format('Y-m-d\TH:i')
         ]);
@@ -42,9 +43,14 @@ class AppointmentEditFormComponent extends Component
     public function update()
     {
         $this->validate();
-        $this->appointment->update();
-
-        session()->flash('message', 'Appointment updated successfully.');
+        
+        try {
+            $this->appointment->update();
+            session()->flash('message', 'Appointment updated successfully.');
+        } catch (\Exception $e) {
+            session()->flash('danger', 'Updating appointment failed.');
+        }
+        
         return redirect(route('appointments.view'));
     }
 
@@ -65,11 +71,11 @@ class AppointmentEditFormComponent extends Component
     }
 
     public function getPatientsProperty() { return
-        Patient::with('user:id,name')->get();
+        Patient::with('user:id,name')->get(['id', 'user_id']);
     }
 
     public function getDoctorsProperty() { return
-        Doctor::with('user:id,name')->get();
+        Doctor::with('user:id,name')->get(['id', 'user_id']);
     }
 
     public function getStatusesProperty() { return

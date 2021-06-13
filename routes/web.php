@@ -14,7 +14,6 @@ use App\Http\Livewire\PatientComponent\PatientViewComponent;
 use App\Http\Livewire\PaymentComponent;
 use App\Http\Livewire\PrescriptionComponent;
 use App\Http\Livewire\ProfileComponent;
-use App\Http\Livewire\Receptionist\AppointmentComponent\ReceptionistAppointmentAddFormComponent;
 use App\Http\Livewire\StockComponent;
 use App\Http\Livewire\TreatmentComponent;
 use Illuminate\Support\Facades\Auth;
@@ -44,39 +43,8 @@ Route::middleware('auth')->group( function() {
     Route::get('/profile', ProfileComponent\ProfileAddFormComponent::class)->name('profile.add');
     Route::get('/profile/{role}/{user_id}', ProfileComponent\ProfileEditFormComponent::class)->name('profile.view');
 
-    //PATIENT
-    Route::middleware('role:patient')->group( function() {
-        //APPOINTMENTS
-        Route::get('/patient/appointments/add', Patient\AppointmentComponent\PatientAppointmentAddFormComponent::class)->name('patient.appointments.add');
-        Route::get('/patient/appointments', Patient\AppointmentComponent\PatientAppointmentViewComponent::class)->name('patient.appointments.view');
-        Route::get('/patient/appointments/edit/{appointment}', Patient\AppointmentComponent\PatientAppointmentEditFormComponent::class)->name('patient.appointments.edit');
-
-        //CASE-HISTORIES
-        Route::get('/patient/case-histories', Patient\HistoryComponent\PatientHistoryViewComponent::class)->name('patient.histories.view');
-
-        //PRESCRIPTIONS
-        Route::get('/patient/prescriptions', Patient\PrescriptionComponent\PatientPrescriptionViewComponent::class)->name('patient.prescriptions.view');
-
-        //PAYMENTS
-        Route::get('/patient/payments', PatientPaymentViewComponent::class)->name('patient.payments.view');
-        Route::get('/patient/payments/pdf', [PaymentPdfComponent::class, 'show'])->name('patient.payment.pdf');
-
-        //DASHBOARD
-        Route::get('/patient/dashboard', Patient\DashboardComponent\PatientDashboardComponent::class)->name('patient.dashboard.view');
-    });
-
-    //RECEP
-    Route::middleware('role:receptionist')->group( function() {
-        Route::get('/receptionist/appointments/add', ReceptionistAppointmentAddFormComponent::class)->name('receptionist.appointments.add');
-    });
-
-    //DOCTOR
-    Route::middleware('role:doctor')->group( function() {
-        Route::get('/doctor/appointments/add', DoctorAppointmentAddFormComponent::class)->name('doctor.appointments.add');
-    });
-
-    //RECEP,DOC,ADMIN
-    Route::middleware('role:receptionist|doctor|admin')->group( function() {
+    //ADMIN, DOCTOR.
+    Route::middleware('role:admin|doctor|receptionist')->group( function() {
         //APPOINTMENTS
         Route::get('/appointments', AppointmentComponent\AppointmentViewComponent::class)->name('appointments.view');
         Route::get('/appointments/edit/{appointment}', AppointmentComponent\AppointmentEditFormComponent::class)->name('appointments.edit');
@@ -130,10 +98,46 @@ Route::middleware('auth')->group( function() {
         Route::get('/deposits/add', DepositComponent\DepositAddFormComponent::class)->name('deposits.add');
     });
 
-    Route::middleware('role:doctor|admin')->group( function() {
+    //ADMIN, DOCTOR
+    Route::middleware('role:admin|doctor')->group( function() {
         //PRESCRIPTIONS
-        Route::get('/prescriptions/add', PrescriptionComponent\PrescriptionAddFormComponent::class)->name('prescriptions.add');
         Route::get('/prescriptions/edit/{prescription}', PrescriptionComponent\PrescriptionEditFormComponent::class)->name('prescriptions.edit');
         Route::get('/prescriptions/restore/{prescription_id}', [PrescriptionComponent\PrescriptionViewComponent::class, 'restore'])->name('prescriptions.restore');
+    });
+
+    //ADMIN, RECEPTIONIST
+    Route::middleware('role:admin|receptionist')->group( function() {
+        //APPOINTMENTS
+        Route::get('/appointments/add', AppointmentComponent\AppointmentAddFormComponent::class)->name('appointments.add');
+    });
+
+    //DOCTOR
+    Route::middleware('role:doctor')->group( function() {
+        //DOCUMENTS
+        Route::get('/doctor/appointments/add', DoctorAppointmentAddFormComponent::class)->name('doctor.appointments.add');
+
+        //PRESCRIPTIONS
+        Route::get('/prescriptions/add', PrescriptionComponent\PrescriptionAddFormComponent::class)->name('prescriptions.add');
+    });
+
+    //PATIENT
+    Route::middleware('role:patient')->group( function() {
+        //APPOINTMENTS
+        Route::get('/patient/appointments/add', Patient\AppointmentComponent\PatientAppointmentAddFormComponent::class)->name('patient.appointments.add');
+        Route::get('/patient/appointments', Patient\AppointmentComponent\PatientAppointmentViewComponent::class)->name('patient.appointments.view');
+        Route::get('/patient/appointments/edit/{appointment}', Patient\AppointmentComponent\PatientAppointmentEditFormComponent::class)->name('patient.appointments.edit');
+
+        //CASE-HISTORIES
+        Route::get('/patient/case-histories', Patient\HistoryComponent\PatientHistoryViewComponent::class)->name('patient.histories.view');
+
+        //PRESCRIPTIONS
+        Route::get('/patient/prescriptions', Patient\PrescriptionComponent\PatientPrescriptionViewComponent::class)->name('patient.prescriptions.view');
+
+        //PAYMENTS
+        Route::get('/patient/payments', PatientPaymentViewComponent::class)->name('patient.payments.view');
+        Route::get('/patient/payments/pdf', [PaymentPdfComponent::class, 'show'])->name('patient.payment.pdf');
+
+        //DASHBOARD
+        Route::get('/patient/dashboard', Patient\DashboardComponent\PatientDashboardComponent::class)->name('patient.dashboard.view');
     });
 });

@@ -32,9 +32,14 @@ class TreatmentEditFormComponent extends Component
     public function create()
     {
         $this->validate();
-        $this->treatment->update();
+       
+        try {
+            $this->treatment->update();
+            session()->flash('message', 'Treatment updated successfully.');
+        } catch (\Exception $e) {
+            session()->flash('message', 'Updating treatment failed.');
+        }
 
-        session()->flash('message', 'Treatment updated successfully.');
         return redirect(route('treatments.view'));
     }
 }

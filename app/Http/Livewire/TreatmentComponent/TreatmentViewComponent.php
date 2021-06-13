@@ -52,7 +52,7 @@ class TreatmentViewComponent extends Component
         if ($treatment && $treatment->trashed()) {
             $treatment->restore();
         } else {
-            abort(404);
+            abort(403);
         }
 
         session()->flash('message', 'Treatment restored successfully.');

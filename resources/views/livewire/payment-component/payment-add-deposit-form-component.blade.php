@@ -41,7 +41,7 @@
             </div>
             <div class="form-group col">
                 <label for="due">Due Amount</label>
-                <input readonly type="number" class="form-control" id="due" name="due" wire:model.defer="due">
+                <input readonly type="number" class="form-control" id="due" name="due" wire:model="due">
             </div> 
         </div>
         <div class="form-row">

@@ -24,9 +24,14 @@ class CategoryEditFormComponent extends Component
     public function update()
     {
         $this->validate();
-        $this->category->update();
+     
+        try {
+            $this->category->update();
+            session()->flash('message', 'Category updated successfully.');
+        } catch (\Exception $e) {
+            session()->flash('message', 'Updating category failed.');
+        }
 
-        session()->flash('message', 'Category updated successfully.');
         return redirect(route('categories.view'));
     }
 }
