@@ -55,7 +55,7 @@ class HistoryViewComponent extends Component
         if ($history && $history->trashed()) {
             $history->restore();
         } else {
-            abort(404);
+            abort(403);
         }
 
         session()->flash('message', 'History restored successfully.');

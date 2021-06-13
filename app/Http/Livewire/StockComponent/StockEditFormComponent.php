@@ -21,14 +21,7 @@ class StockEditFormComponent extends Component
     {
         return [
             'stock.quantity' => ['required', 'integer'],
-            'stock.treatment_id' => ['required', 'integer', 'unique:stocks,treatment_id']
-        ];
-    }
-
-    public function messages()
-    {
-        return [
-            'stock.treatment_id.unique' => 'Treatment is already in stock.',
+            'stock.treatment_id' => ['required', 'integer']
         ];
     }
 
@@ -41,9 +34,14 @@ class StockEditFormComponent extends Component
     public function update()
     {
         $this->validate();
-        $this->stock->update();
+        
+        try {
+            $this->stock->update();
+            session()->flash('message', 'Stock updated successfully.');
+        } catch (\Exception $e) {
+            session()->flash('message', 'Updating stock failed.');
+        }
 
-        session()->flash('message', 'Stock updated successfully.');
         return redirect(route('stocks.view'));
     }
 

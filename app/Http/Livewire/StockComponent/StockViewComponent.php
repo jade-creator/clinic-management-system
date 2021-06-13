@@ -34,12 +34,12 @@ class StockViewComponent extends Component
 
     public function getRowsQueryProperty()
     {
-        return Stock::search($this->search)
-                    ->select(['id', 'quantity', 'updated_at', 'treatment_id'])
+        return Stock::select(['id', 'quantity', 'updated_at', 'treatment_id'])
                     ->with('treatment:id,name')
                     ->when(!empty($this->search), function($query) {
                         return $query->orWhereHas('treatment', function($query) {
-                                return $query->where('name', 'LIKE', '%'.$this->search.'%');
+                                return $query->where('id', 'LIKE', '%'.$this->search.'%')
+                                        ->orWhere('name', 'LIKE', '%'.$this->search.'%');
                         });
                     })
                     ->latest();
@@ -52,7 +52,7 @@ class StockViewComponent extends Component
         if ($stock && $stock->trashed()) {
             $stock->restore();
         } else {
-            abort(404);
+            abort(403);
         }
 
         session()->flash('message', 'Stock restored successfully.');

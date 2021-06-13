@@ -72,7 +72,7 @@ class AppointmentViewComponent extends Component
         if ($appointment && $appointment->trashed()) {
             $appointment->restore();
         } else {
-            abort(404);
+            abort(403);
         }
 
         session()->flash('message', 'Appointment restored successfully.');

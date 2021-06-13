@@ -43,8 +43,7 @@ class DoctorViewComponent extends Component
                 ])
                 ->when(!empty($this->search), function($query) {
                     return $query->whereHas('user', function($query) {
-                        return $query->where('id', 'LIKE', '%'.$this->search.'%')
-                                ->orWhere('name', 'LIKE', '%'.$this->search.'%');
+                        return $query->where('name', 'LIKE', '%'.$this->search.'%');
                     });
                 })
                 ->latest();

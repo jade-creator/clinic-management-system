@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Receptionist\AppointmentComponent;
+namespace App\Http\Livewire\AppointmentComponent;
 
 use App\Models\Appointment;
 use App\Models\Doctor;
@@ -8,14 +8,14 @@ use App\Models\Patient;
 use App\Models\Status;
 use Livewire\Component;
 
-class ReceptionistAppointmentAddFormComponent extends Component
+class AppointmentAddFormComponent extends Component
 {
     public Appointment $appointment;
     public $patient_name;
     public $doctor_name;
 
     public function render() { return 
-        view('livewire.receptionist.appointment-component.receptionist-appointment-add-form-component');
+        view('livewire.appointment-component.appointment-add-form-component');
     }
 
     public function mount()
@@ -30,16 +30,21 @@ class ReceptionistAppointmentAddFormComponent extends Component
             'appointment.remarks' => ['nullable', 'string'],
             'appointment.patient_id' => ['required', 'integer'],
             'appointment.doctor_id' => ['required', 'integer'],
-            'appointment.status_id' => ['required', 'integer'],
+            'appointment.status_id' => ['required', 'integer']
         ];
     }
 
     public function create()
     {
         $this->validate();
-        $this->appointment->save();
+        
+        try {
+            $this->appointment->save();
+            session()->flash('message', 'Appointment created successfully.');
+        } catch (\Exception $e) {
+            session()->flash('danger', 'Creating appointment failed.');
+        }
 
-        session()->flash('message', 'Appointment created successfully.');
         return redirect(route('appointments.view'));
     }
 
@@ -60,11 +65,11 @@ class ReceptionistAppointmentAddFormComponent extends Component
     }
 
     public function getPatientsProperty() { return
-        Patient::with('user:id,name')->get();
+        Patient::with('user:id,name')->get(['id', 'user_id']);
     }
 
     public function getDoctorsProperty() { return
-        Doctor::with('user:id,name')->get();
+        Doctor::with('user:id,name')->get(['id', 'user_id']);
     }
 
     public function getStatusesProperty() { return

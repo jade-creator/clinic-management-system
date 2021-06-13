@@ -60,7 +60,7 @@ class PrescriptionViewComponent extends Component
         if ($prescription && $prescription->trashed()) {
             $prescription->restore();
         } else {
-            abort(404);
+            abort(403);
         }
 
         session()->flash('message', 'Prescription restored successfully.');

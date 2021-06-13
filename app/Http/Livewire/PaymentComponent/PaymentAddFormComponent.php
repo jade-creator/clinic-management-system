@@ -105,15 +105,20 @@ class PaymentAddFormComponent extends Component
     {
         $this->validate();
 
-        $items = (new CollectItems())->array_columns($this->items, 'quantity,amount', 'id');
+        try {
+            $items = (new CollectItems())->array_columns($this->items, 'quantity,amount', 'id');
 
-        $this->payment->due = $this->payment->grand_total - $this->deposit->amount_deposit;
-        
-        $this->payment->save();
+            $this->payment->due = $this->payment->grand_total - $this->deposit->amount_deposit;
+            $this->payment->save();
+            $this->payment->treatments()->attach($items);
+            $this->payment->deposits()->save($this->deposit);
+            session()->flash('message', 'Payment created successfully.');
+        } catch (\Exception $e) {
+            session()->flash('danger', 'Creating payment failed.');
+        }
 
-        $this->payment->treatments()->attach($items);
+        return redirect(route('payments.view'));
 
-        $this->payment->deposits()->save($this->deposit);
     }
 
     public function updatedItems() 
@@ -139,10 +144,6 @@ class PaymentAddFormComponent extends Component
     public function updatedPaymentDiscount($value) 
     {
         $this->validateOnly('payment.discount');
-
-        if (empty($value) || is_null($this->payment->isPercent)) {
-            return \Debugbar::info(['discount' => 'sad']);
-        }
 
         return $this->payment->grand_total = $this->computedTotal();
     }

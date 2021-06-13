@@ -37,9 +37,14 @@ class TreatmentAddFormComponent extends Component
     public function create()
     {
         $this->validate();
-        $this->treatment->save();
-
-        session()->flash('message', 'Treatment created successfully.');
+        
+        try {
+            $this->treatment->save();
+            session()->flash('message', 'Treatment created successfully.');
+        } catch (\Exception $e) {
+            session()->flash('message', 'Creating treatment failed.');
+        }
+        
         return redirect(route('treatments.view'));
     }
 }

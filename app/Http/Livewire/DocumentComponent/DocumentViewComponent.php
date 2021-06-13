@@ -55,10 +55,10 @@ class DocumentViewComponent extends Component
         if ($document && $document->trashed()) {
             $document->restore();
         } else {
-            abort(404);
+            abort(403);
         }
 
-        session()->flash('message', 'Document restored successfully.');
+        session()->flash('message', 'Document restored successfully');
         return redirect(route('documents.view'));
     }
 
@@ -72,7 +72,12 @@ class DocumentViewComponent extends Component
 
     public function download($path, $fileName) 
     {
-        return response()->download(storage_path('app/documents/' . $path . '/' . $fileName));
+        try {
+            return response()->download(storage_path('app/documents/' . $path . '/' . $fileName));
+        } catch (\Exception $e) {
+            session()->flash('danger', 'Downloading document failed');
+            return redirect(route('documents.view'));
+        }
     }
 
     public function updatedPaginateValue() { $this->resetPage(); }

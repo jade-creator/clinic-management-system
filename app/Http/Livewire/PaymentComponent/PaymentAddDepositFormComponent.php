@@ -20,7 +20,6 @@ class PaymentAddDepositFormComponent extends Component
             'deposit.amount_deposit' => [ 'required', 'integer', 'lte:due', 'min:100'],
             'deposit.isCash' => [ 'required', 'integer'],
             'deposit.payment_id' => [ 'required', 'integer'],
-            'due' => [ 'integer'],
         ];
     }
 
@@ -30,6 +29,7 @@ class PaymentAddDepositFormComponent extends Component
             'deposit' => new Deposit(),
             'deposit.payment_id' => $this->paymentId 
         ]);
+
         $this->updatedDepositPaymentId($this->paymentId);
     }
 
@@ -47,10 +47,12 @@ class PaymentAddDepositFormComponent extends Component
             $payment = $this->payments->find($this->deposit->payment_id);
             $payment->due = $this->due - $this->deposit->amount_deposit;
             $payment->save();
-
-        } catch (\Throwable $th) {
-            throw $th;
+            session()->flash('message', 'Deposit added successfully.');
+        } catch (\Exception $e) {
+            session()->flash('danger', 'Creating deposit failed.');
         }
+
+        return redirect(route('payments.view'));
     }
 
     public function getPaymentsProperty() { return

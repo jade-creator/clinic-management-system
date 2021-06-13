@@ -31,9 +31,14 @@ class PrescriptionAddFormComponent extends Component
 
     public function create() {
         $this->validate();
-        $this->prescription->save();
+        
+        try {
+            $this->prescription->save();
+            session()->flash('message', 'Prescription created successfully.');
+        } catch (\Exception $e) {
+            session()->flash('message', 'Creating prescription failed.');
+        }
 
-        session()->flash('message', 'Prescription created successfully.');
         return redirect(route('prescriptions.view'));
     }
 

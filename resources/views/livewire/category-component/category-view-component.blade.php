@@ -1,34 +1,32 @@
-<x-table title="Categories" placeholder="ID, Name, Description">
-    <x-slot name="button">
-        <a href="{{ route('categories.add') }}">
-            <button class="btn btn-primary">Add Category</button>
-        </a>
-    </x-slot>
+<div class="px-3 px-sm-4">
+    <x-table title="Categories" placeholder="ID, Name, Description">
+        <x-slot name="button">
+            <a href="{{ route('categories.add') }}">
+                <button class="btn btn-primary">Add Category</button>
+            </a>
+        </x-slot>
 
-    <x-slot name="filter">
-    </x-slot>
+        <x-slot name="filter">
+        </x-slot>
 
-    @include('partials.alerts')
+        @include('partials.alerts')
 
-    <div name="slot">
-        <table class="table table-hover table-bordered table-light">
-            <thead>
-                <tr>
-                    <th class="text-left" scope="col">Category ID</th>
-                    <th class="text-left" scope="col">Category Name</th>
-                    <th class="text-left" scope="col">Description</th>
-                    @if (auth()->user()->role->name !== 'patient')
-                        <th class="text-left" scope="col">Option</th>
-                    @endif
-                </tr>
-            </thead>
-            <tbody>
-                @forelse ($categories as $category)
+        <div name="slot">
+            <table class="table table-hover table-bordered table-light">
+                <thead>
                     <tr>
-                        <td class="text-left" scope="row">{{ $category->id }}</td>
-                        <td class="text-left">{{ $category->name }}</td>
-                        <td class="text-left">{{ $category->description }}</td>
-                        @if (auth()->user()->role->name !== 'patient')
+                        <th class="text-left" scope="col">Category ID</th>
+                        <th class="text-left" scope="col">Category Name</th>
+                        <th class="text-left" scope="col">Description</th>
+                        <th class="text-left" scope="col">Option</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse ($categories as $category)
+                        <tr>
+                            <td class="text-left" scope="row">{{ $category->id }}</td>
+                            <td class="text-left">{{ $category->name }}</td>
+                            <td class="text-left">{{ $category->description }}</td>
                             <td class="text-left">
                                 <a class="text-decoration-none" href="{{ route('categories.edit', $category) }}">
                                     <button class="btn text-success rounded-circle p-1 mx-1" data-toggle="tooltip" data-placement="top" title="Details">
@@ -52,18 +50,18 @@
                                     </button>
                                 @endif
                             </td>
-                        @endif
-                    </tr>
-                @empty
-                    <tr>
-                        <td scope="row" colspan="4" class="text-center">No categories found.</td>
-                    </tr>
-                @endforelse
-            </tbody>
-        </table>
-        
-        <div>
-             {{ $categories->links('pagination::bootstrap-4') }}
+                        </tr>
+                    @empty
+                        <tr>
+                            <td scope="row" colspan="4" class="text-center">No categories found.</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+            
+            <div>
+                {{ $categories->links('pagination::bootstrap-4') }}
+            </div>
         </div>
-    </div>
-</x-table>
+    </x-table>
+</div>

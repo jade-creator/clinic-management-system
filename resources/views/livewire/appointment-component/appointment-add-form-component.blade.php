@@ -1,4 +1,4 @@
-<div class="">
+<div class="px-3 px-sm-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Appointment Details</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
@@ -101,12 +101,10 @@
         </div>
         <div class="form-group">
             <label for="remarks">Remarks</label>
-            <textarea class="form-control" id="remarks" name="remarks" placeholder="lorem ipsum..." required autofocus wire:model.defer="appointment.remarks"  wire:loading.attr="disabled"></textarea>
+            <textarea class="form-control" id="remarks" name="remarks" placeholder="lorem ipsum..." autofocus wire:model.defer="appointment.remarks"  wire:loading.attr="disabled"></textarea>
         </div>
-        @if (auth()->user()->role->name == 'receptionist')
-            <div class="form-group text-right">
-                <button class="btn px-5 btn-primary" type="submit" wire:loading.attr="disabled">Save</button>
-            </div>
-        @endif
+        <div class="form-group text-right">
+            <button class="btn px-5 btn-primary" type="submit" wire:loading.attr="disabled">Save</button>
+        </div>
     </form>
 </div>

@@ -46,9 +46,14 @@ class StockAddFormComponent extends Component
     public function create()
     {
         $this->validate();
-        $this->stock->save();
+        
+        try {
+            $this->stock->save();
+            session()->flash('message', 'Stock created successfully.');
+        } catch (\Exception $e) {
+            session()->flash('message', 'Creating stock failed.');
+        }
 
-        session()->flash('message', 'Stock created successfully.');
         return redirect(route('stocks.view'));
     }
 

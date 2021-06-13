@@ -1,38 +1,36 @@
-<x-table title="Case Histories" placeholder="Sample">
-    <x-slot name="button">
-        <a href="{{ route('histories.add') }}">
-            <button class="btn btn-primary">Add Case History</button>
-        </a>
-    </x-slot>
+<div class="px-3 px-sm-4">
+    <x-table title="Case Histories" placeholder="ID, name, description, note">
+        <x-slot name="button">
+            <a href="{{ route('histories.add') }}">
+                <button class="btn btn-primary">Add Case History</button>
+            </a>
+        </x-slot>
 
-    <x-slot name="filter">
-    </x-slot>
+        <x-slot name="filter">
+        </x-slot>
 
-    @include('partials.alerts')
+        @include('partials.alerts')
 
-    <div name="slot">
-        <table class="table table-hover table-bordered table-light">
-            <thead>
-                <tr>
-                    <th class="text-left" scope="col">Date</th>
-                    <th class="text-left" scope="col">Patient ID</th>
-                    <th class="text-left" scope="col">Patient Name</th>
-                    <th class="text-left" scope="col">Description</th>
-                    <th class="text-left" scope="col">Note</th>
-                    @if (auth()->user()->role->name !== 'patient')
-                        <th class="text-center" scope="col">Option</th>
-                    @endif
-                </tr>
-            </thead>
-            <tbody>
-                @forelse ($histories as $history)
+        <div name="slot">
+            <table class="table table-hover table-bordered table-light">
+                <thead>
                     <tr>
-                        <td class="text-left" scope="row">{{ $history->date }}</td>
-                        <td class="text-left">{{ $history->patient_id }}</td>
-                        <td class="text-left">{{ $history->patient->user->name }}</td>
-                        <td class="text-left">{{ $history->description }}</td>
-                        <td class="text-left">{{ $history->note }}</td>
-                        @if (auth()->user()->role->name !== 'patient')
+                        <th class="text-left" scope="col">Date</th>
+                        <th class="text-left" scope="col">Patient ID</th>
+                        <th class="text-left" scope="col">Patient Name</th>
+                        <th class="text-left" scope="col">Description</th>
+                        <th class="text-left" scope="col">Note</th>
+                        <th class="text-center" scope="col">Option</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse ($histories as $history)
+                        <tr>
+                            <td class="text-left" scope="row">{{ $history->date }}</td>
+                            <td class="text-left">{{ $history->patient_id }}</td>
+                            <td class="text-left">{{ $history->patient->user->name }}</td>
+                            <td class="text-left">{{ $history->description }}</td>
+                            <td class="text-left">{{ $history->note }}</td>
                             <td class="text-center">
                                 <a href="{{ route('histories.edit', $history) }}" class="text-decoration-none">
                                     <button class="btn text-success rounded-circle p-1 mx-1" data-toggle="tooltip" data-placement="top" title="Details">
@@ -54,18 +52,18 @@
                                     </svg>
                                 </button>
                             </td>
-                        @endif
-                    </tr>
-                @empty
-                    <tr>
-                        <td scope="row" colspan="6" class="text-center">No case histories found.</td>
-                    </tr>
-                @endforelse
-            </tbody>
-        </table>
-        
-        <div>
-             {{ $histories->links('pagination::bootstrap-4') }}
+                        </tr>
+                    @empty
+                        <tr>
+                            <td scope="row" colspan="6" class="text-center">No case histories found.</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+            
+            <div>
+                {{ $histories->links('pagination::bootstrap-4') }}
+            </div>
         </div>
-    </div>
-</x-table>
+    </x-table>
+</div>

@@ -29,9 +29,14 @@ class CategoryAddFormComponent extends Component
     public function create()
     {
         $this->validate();
-        $this->category->save();
 
-        session()->flash('message', 'Category created successfully.');
+        try {
+            $this->category->save();
+            session()->flash('message', 'Category created successfully.');
+        } catch (\Exception $e) {
+            session()->flash('danger', 'Creating category failed.');
+        }
+
         return redirect(route('categories.view'));
     }
 }

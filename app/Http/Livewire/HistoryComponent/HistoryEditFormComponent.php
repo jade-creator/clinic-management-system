@@ -32,9 +32,14 @@ class HistoryEditFormComponent extends Component
     public function update()
     {
         $this->validate();
-        $this->history->update();
-
-        session()->flash('message', 'History updated successfully.');
+   
+        try {
+            $this->history->update();
+            session()->flash('message', 'History updated successfully.');
+        } catch (\Exception $e) {
+            session()->flash('danger', 'Updating history failed.');
+        }
+        
         return redirect(route('histories.view'));
     }
 

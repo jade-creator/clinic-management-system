@@ -1,34 +1,32 @@
-<x-table title="Stocks" placeholder="Sample">
-    <x-slot name="button">
-        <a href="{{ route('stocks.add') }}">
-            <button class="btn btn-primary">Add Stock</button>
-        </a>
-    </x-slot>
+<div class="px-3 px-sm-4">
+    <x-table title="Stocks" placeholder="ID, name">
+        <x-slot name="button">
+            <a href="{{ route('stocks.add') }}">
+                <button class="btn btn-primary">Add Stock</button>
+            </a>
+        </x-slot>
 
-    <x-slot name="filter">
-    </x-slot>
+        <x-slot name="filter">
+        </x-slot>
 
-    @include('partials.alerts')
+        @include('partials.alerts')
 
-    <div name="slot">
-        <table class="table table-hover table-bordered table-light">
-            <thead>
-                <tr>
-                    <th class="text-left" scope="col">Treatment ID</th>
-                    <th class="text-left" scope="col">Treatment Name</th>
-                    <th class="text-center" scope="col">Quantity</th>
-                    @if (auth()->user()->role->name !== 'patient')  
-                        <th class="text-center" scope="col">Option</th>
-                    @endif
-                </tr>
-            </thead>
-            <tbody>
-                @forelse ($stocks as $stock)
+        <div name="slot">
+            <table class="table table-hover table-bordered table-light">
+                <thead>
                     <tr>
-                        <td class="text-left" scope="row">{{ $stock->treatment->id }}</td>
-                        <td class="text-left">{{ $stock->treatment->name }}</td>
-                        <td class="text-center">{{ $stock->quantity }}</td>
-                        @if (auth()->user()->role->name !== 'patient')  
+                        <th class="text-left" scope="col">Treatment ID</th>
+                        <th class="text-left" scope="col">Treatment Name</th>
+                        <th class="text-center" scope="col">Quantity</th>
+                        <th class="text-center" scope="col">Option</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse ($stocks as $stock)
+                        <tr>
+                            <td class="text-left" scope="row">{{ $stock->treatment->id }}</td>
+                            <td class="text-left">{{ $stock->treatment->name }}</td>
+                            <td class="text-center">{{ $stock->quantity }}</td>
                             <td class="text-center">
                                 <a class="text-decoration-none" href="{{ route('stocks.edit', $stock) }}">
                                     <button class="btn text-success rounded-circle p-1 mx-1" data-toggle="tooltip" data-placement="top" title="Details">
@@ -50,20 +48,18 @@
                                     </svg>
                                 </button>
                             </td>
-                        @endif
-                    </tr>
-                @empty
-                    <tr>
-                        <td colspan="4" class="text-center">No stocks found.</td>
-                    </tr>
-                @endforelse
-            </tbody>
-        </table>
-        
-        <div>
-             {{ $stocks->links('pagination::bootstrap-4') }}
+                        </tr>
+                    @empty
+                        <tr>
+                            <td scope="row" colspan="4" class="text-center">No stocks found.</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+            
+            <div>
+                {{ $stocks->links('pagination::bootstrap-4') }}
+            </div>
         </div>
-    </div>
-</x-table>
-
-
+    </x-table>
+</div>
