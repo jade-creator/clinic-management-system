@@ -12,7 +12,7 @@ class DocumentAddFormComponent extends Component
     use WithFileUploads;
 
     public Document $document;
-    public $patient_name;
+    public $patient_name = '';
     public $document_file;
 
     public function render() { return 
@@ -60,6 +60,15 @@ class DocumentAddFormComponent extends Component
     public function updatedDocumentPatientId($value)
     {
         $this->patient_name = $value;
+    }
+
+    public function updatedDocumentFile() 
+    { 
+        $this->dispatchBrowserEvent('swal:modal', [ 
+            'type' => 'success',
+            'title' => 'File Uploaded',
+            'text' => '',
+        ]);
     }
 
     public function updatedPatientName($value)

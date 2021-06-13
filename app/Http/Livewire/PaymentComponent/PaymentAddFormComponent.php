@@ -15,6 +15,8 @@ class PaymentAddFormComponent extends Component
     public Deposit $deposit;
     public $items, $collectionTreatments, $patient_name, $treatment_id, $quantity;
 
+    protected $listeners = ['removeItem'];
+
     public function render() { return 
         view('livewire.payment-component.payment-add-form-component');
     }
@@ -63,8 +65,22 @@ class PaymentAddFormComponent extends Component
         ]);
 
         if (!empty($this->items) && (new CollectItems())->in_deep_array($this->treatment_id, $this->items)) {
-            return \Debugbar::info([
-                'info' => 'the item is already added.'
+            return $this->dispatchBrowserEvent('swal:modal', [ 
+                'type' => 'error',
+                'title' => 'Item already added',
+                'text' => '',
+            ]);
+        }
+
+        $treatment = Treatment::select(['id'])
+                        ->with('stock:id,quantity,treatment_id')
+                        ->find($this->treatment_id);
+
+        if ($this->quantity > $treatment->stock->quantity) {
+            return $this->dispatchBrowserEvent('swal:modal', [ 
+                'type' => 'error',
+                'title' => 'Sorry, stock is not enough',
+                'text' => '',
             ]);
         }
 
@@ -80,6 +96,15 @@ class PaymentAddFormComponent extends Component
         ];
 
         $this->updatedItems();
+    }
+
+    public function removeConfirm($itemIndex) {
+        $this->dispatchBrowserEvent('swal:confirm', [ 
+            'type' => 'warning',
+            'title' => 'Are you sure?',
+            'text' => '',
+            'id' => $itemIndex,
+        ]);
     }
 
     public function removeItem($itemIndex)
@@ -118,7 +143,6 @@ class PaymentAddFormComponent extends Component
         }
 
         return redirect(route('payments.view'));
-
     }
 
     public function updatedItems() 

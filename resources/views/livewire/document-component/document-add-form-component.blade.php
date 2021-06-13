@@ -49,7 +49,7 @@
                 </select>
             </div>
         </div>
-        <div class="form-group row">
+        <div class="form-row">
             <div class="form-group col">
                 <label for="date">Date</label>
                 <input id="date" name="date" type="date" class="form-control @error('document.date') is-invalid @enderror" required autofocus wire:model.defer="document.date" wire:loading.attr="disabled">
@@ -61,12 +61,16 @@
             </div> 
             <div class="form-group col">
                 <label for="document">Document</label>
-                <input type="file" name="document" id="document" class="form-control  @error('document_file') is-invalid @enderror" autofocus wire:model="document_file" wire:loading.attr="disabled">
-                @error('document_file')
-                    <div class="invalid-feedback">
-                        {{$message}}
-                    </div>
-                @enderror
+                <div class="custom-file" id="document">
+                    <input type="file" class="custom-file-input @error('document_file') is-invalid @enderror" id="document_file" autofocus wire:model="document_file" wire:loading.attr="disabled"/>
+                    <label class="custom-file-label" for="document_file"> 
+                        @if ($this->document_file)
+                            {{ $this->document_file->getClientOriginalName() }}
+                        @else
+                            Choose a file @error('document_file') (required) @enderror
+                        @endif
+                    </label>
+                </div>
             </div>
         </div>
         <div class="form-group">
