@@ -1,5 +1,5 @@
 <div class="px-3 px-sm-4">
-    <x-table title="Patients" placeholder="ID, name, phone">
+    <x-table title="Receptionists" placeholder="ID, name">
         <x-slot name="button">
         </x-slot>
 
@@ -10,22 +10,18 @@
             <table class="table table-hover table-bordered table-light">
                 <thead>
                     <tr>
-                        <th class="text-left" scope="col">Patient ID</th>
+                        <th class="text-left" scope="col">Receptionist ID</th>
                         <th class="text-left" scope="col">Name</th>
-                        <th class="text-left" scope="col">Phone</th>
-                        <th class="text-center" scope="col">Due Balance</th>
                         <th class="text-left" scope="col">Option</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($patients as $patient)
+                    @forelse ($receptionists as $receptionist)
                         <tr>
-                            <td class="text-left" scope="row">{{ $patient->id ?? 'N/A' }}</td>
-                            <td class="text-left">{{ $patient->user->name ?? 'N/A' }}</td>
-                            <td class="text-left">{{ $patient->user->profile->phone_number ?? 'N/A' }}</td>
-                            <td class="text-center">{{ $patient->payments->sum('due') ?? 'N/A' }}</td>
+                            <td class="text-left" scope="row">{{ $receptionist->id ?? 'N/A' }}</td>
+                            <td class="text-left">{{ $receptionist->user->name ?? 'N/A' }}</td>
                             <td class="text-left">
-                                <a class="text-decoration-none" href="{{ route('users.view', ['search' => $patient->user->name]) }}">
+                                <a class="text-decoration-none" href="{{ route('users.view', ['search' => $receptionist->user->name]) }}">
                                     <button class="btn text-info rounded-circle p-1 mx-1" data-toggle="tooltip" data-placement="top" title="View Profile">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -38,14 +34,14 @@
                         </tr>
                     @empty
                         <tr>
-                            <td scope="row" colspan="4" class="text-center">No patients found.</td>
+                            <td scope="row" colspan="3" class="text-center">No receptionists found.</td>
                         </tr>
                     @endforelse
                 </tbody>
             </table>
             
             <div>
-                {{ $patients->links('pagination::bootstrap-4') }}
+                {{ $receptionists->links('pagination::bootstrap-4') }}
             </div>
         </div>
     </x-table>

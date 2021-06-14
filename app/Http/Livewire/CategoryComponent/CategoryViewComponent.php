@@ -14,11 +14,11 @@ class CategoryViewComponent extends Component
     protected $paginationTheme = 'bootstrap';
     public $paginateValue = 10;
 
-    public $queryString = [
+    protected $queryString = [
         'search' => ['except' => '']
     ];
 
-    public $updatesQueryString = [
+    protected $updatesQueryString = [
         'search'
     ];  
 

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Livewire\PatientComponent;
+namespace App\Http\Livewire\ReceptionistComponent;
 
-use App\Models\Patient;
+use App\Models\Receptionist;
 use App\Traits\WithFilters;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class PatientViewComponent extends Component
+class ReceptionistViewComponent extends Component
 {
     use WithPagination, WithFilters;
 
@@ -23,8 +23,8 @@ class PatientViewComponent extends Component
     ];  
 
     public function render() { return 
-        view('livewire.patient-component.patient-view-component', [
-            'patients' => $this->rows
+        view('livewire.receptionist-component.receptionist-view-component', [
+            'receptionists' => $this->rows
         ]);
     }
 
@@ -34,14 +34,11 @@ class PatientViewComponent extends Component
 
     public function getRowsQueryProperty()
     {
-        return Patient::search($this->search)
-                ->with(['user.profile', 'payments'])
+        return Receptionist::search($this->search)
+                ->with('user')
                 ->when(!empty($this->search), function($query) {
                     return $query->orWhereHas('user', function($query) {
                                 return $query->where('name', 'LIKE', '%'.$this->search.'%');
-                            })
-                            ->orWhereHas('user.profile', function($query) {
-                                return $query->where('phone_number', 'LIKE', '%'.$this->search.'%');
                             });
                 })
                 ->latest();
