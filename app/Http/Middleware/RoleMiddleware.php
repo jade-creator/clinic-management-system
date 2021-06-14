@@ -17,9 +17,7 @@ class RoleMiddleware
      */
     public function handle(Request $request, Closure $next, $role)
     {
-        $roles = is_array($role)
-            ? $role
-            : explode('|', $role);
+        $roles = is_array($role) ? $role : explode('|', $role);
 
         if(!in_array(Auth::user()->role->name, $roles, true)) {
             abort(403);
