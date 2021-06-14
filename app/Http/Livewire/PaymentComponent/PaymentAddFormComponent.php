@@ -181,10 +181,10 @@ class PaymentAddFormComponent extends Component
     }
 
     public function getPatientsProperty() { return
-        Patient::with('user')->get();
+        Patient::with('user:id,name')->get(['id', 'user_id']);
     }
 
     public function getTreatmentsProperty() { return
-        Treatment::all();
+        Treatment::has('stock')->get(['id', 'name']);
     }
 }

@@ -60,7 +60,7 @@
         </div> 
         <div class="form-group">
             <label for="description">Description</label>
-            <textarea id="description" name="description" class="form-control @error('history.description') is-invalid @enderror" placeholder="lorem ipsum..." required autofocus wire:model.defer="history.description" wire:loading.attr="disabled"></textarea>
+            <textarea id="description" name="description" class="form-control @error('history.description') is-invalid @enderror" placeholder="..." required autofocus wire:model.defer="history.description" wire:loading.attr="disabled"></textarea>
             @error('history.description')
                 <div class="invalid-feedback">
                     {{$message}}
@@ -69,7 +69,7 @@
         </div>
         <div class="form-group">
             <label for="note">Note</label>
-            <textarea id="note" name="note" class="form-control @error('history.note') is-invalid @enderror" placeholder="lorem ipsum..." required autofocus wire:model.defer="history.note" wire:loading.attr="disabled"></textarea>
+            <textarea id="note" name="note" class="form-control @error('history.note') is-invalid @enderror" placeholder="..." required autofocus wire:model.defer="history.note" wire:loading.attr="disabled"></textarea>
             @error('history.note')
                 <div class="invalid-feedback">
                     {{$message}}

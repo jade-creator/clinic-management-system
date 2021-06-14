@@ -1,14 +1,12 @@
 <div class="px-3 px-sm-4">
-    <x-table title="Appointments" placeholder="Sample">
+    <x-table title="Appointments" placeholder="ID, name, remarks">
         <x-slot name="button">
-            @if (auth()->user()->role->name == 'receptionist')
-                <a href="{{ route('appointments.add') }}">
-                    <button class="btn btn-primary">Add Appointment</button>
-                </a>
-            @endif
-
             @if (auth()->user()->role->name == 'doctor')
                 <a href="{{ route('doctor.appointments.add') }}">
+                    <button class="btn btn-primary">Add Appointment</button>
+                </a>
+            @else
+                <a href="{{ route('appointments.add') }}">
                     <button class="btn btn-primary">Add Appointment</button>
                 </a>
             @endif
@@ -50,11 +48,11 @@
                 <tbody>
                     @forelse ($appointments as $appointment)
                         <tr>
-                            <td class="text-center" scope="row">{{ $appointment->patient->id }}</td>
-                            <td class="text-left">{{ $appointment->patient->user->name }}</td>
-                            <td class="text-center">{{ \Carbon\Carbon::parse($appointment->scheduled_at)->format('Y-m-d g:ia') }}</td>
-                            <td class="text-left">{{ $appointment->status->name }}</td>
-                            <td class="text-center">{{ $appointment->remarks }}</td>
+                            <td class="text-center" scope="row">{{ $appointment->patient->id ?? 'N/A' }}</td>
+                            <td class="text-left">{{ $appointment->patient->user->name ?? 'N/A' }}</td>
+                            <td class="text-center">{{ \Carbon\Carbon::parse($appointment->scheduled_at)->format('Y-m-d g:ia') ?? 'N/A' }}</td>
+                            <td class="text-left">{{ $appointment->status->name ?? 'N/A' }}</td>
+                            <td class="text-center">{{ $appointment->remarks ?? 'N/A' }}</td>
                             <td class="text-center">{{ $appointment->doctor->id ?? 'N/A' }}</td>
                             <td class="text-left">{{ $appointment->doctor->user->name ?? 'N/A' }}</td>
                             <td class="text-left">

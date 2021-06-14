@@ -68,7 +68,7 @@
         </div>
         <div class="form-group">
             <label for="description">Description</label>
-            <textarea id="description" name="description" class="form-control @error('document.description') is-invalid @enderror" placeholder="lorem ipsum..." required autofocus wire:model.defer="document.description" wire:loading.attr="disabled"></textarea>
+            <textarea id="description" name="description" class="form-control @error('document.description') is-invalid @enderror" placeholder="..." required autofocus wire:model.defer="document.description" wire:loading.attr="disabled"></textarea>
             @error('document.description')
                 <div class="invalid-feedback">
                     {{$message}}

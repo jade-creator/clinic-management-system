@@ -111,7 +111,7 @@
         </div>
         <div class="form-group">
             <label for="remarks">Remarks</label>
-            <textarea class="form-control @error('appointment.remarks') is-invalid @enderror" id="remarks" name="remarks" placeholder="lorem ipsum..." autofocus wire:model.defer="appointment.remarks"  wire:loading.attr="disabled"></textarea>
+            <textarea class="form-control @error('appointment.remarks') is-invalid @enderror" id="remarks" name="remarks" placeholder="Optional" autofocus wire:model.defer="appointment.remarks"  wire:loading.attr="disabled"></textarea>
             @error('appointment.remarks')
                 <div class="invalid-feedback">
                     {{$message}}

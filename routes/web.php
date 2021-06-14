@@ -2,6 +2,7 @@
 
 use App\Http\Livewire\AppointmentComponent;
 use App\Http\Livewire\CategoryComponent;
+use App\Http\Livewire\DashboardComponent;
 use App\Http\Livewire\DepositComponent;
 use App\Http\Livewire\Doctor;
 use App\Http\Livewire\DoctorComponent\DoctorViewComponent;
@@ -43,6 +44,9 @@ Route::middleware('auth')->group( function() {
 
     //ADMIN, DOCTOR.
     Route::middleware('role:admin|doctor|receptionist')->group( function() {
+        //DASHBOARD
+        Route::get('/dashboard', DashboardComponent::class)->name('dashboard.view');
+
         //APPOINTMENTS
         Route::get('/appointments', AppointmentComponent\AppointmentViewComponent::class)->name('appointments.view');
         Route::get('/appointments/edit/{appointment}', AppointmentComponent\AppointmentEditFormComponent::class)->name('appointments.edit');
