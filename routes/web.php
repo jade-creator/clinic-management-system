@@ -41,11 +41,11 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::middleware('auth')->group( function() {
     //PROFILE
-    Route::get('/profile', ProfileComponent\ProfileAddFormComponent::class)->name('profile.add');
-    Route::get('/profile/{role}/{user_id}', ProfileComponent\ProfileEditFormComponent::class)->name('profile.view');
+    Route::get('/profile', ProfileComponent\ProfileAddFormComponent::class)->middleware('checkProfile')->name('profile.add');
+    Route::get('/profile/{role}/{user_id}', ProfileComponent\ProfileEditFormComponent::class)->middleware('hasProfile')->name('profile.view');
 
-    //ADMIN, DOCTOR.
-    Route::middleware('role:admin|doctor|receptionist')->group( function() {
+    //ADMIN, DOCTOR, RECEPTIONISTS
+    Route::middleware(['role:admin|doctor|receptionist', 'hasProfile'])->group( function() {
         //DASHBOARD
         Route::get('/dashboard', DashboardComponent::class)->name('dashboard.view');
 
@@ -109,20 +109,20 @@ Route::middleware('auth')->group( function() {
     });
 
     //ADMIN
-    Route::get('/prescriptions/add', PrescriptionComponent\PrescriptionAddFormComponent::class)->middleware('role:admin')->name('prescriptions.add');
+    Route::get('/prescriptions/add', PrescriptionComponent\PrescriptionAddFormComponent::class)->middleware(['role:admin', 'hasProfile'])->name('prescriptions.add');
 
     //ADMIN, DOCTOR
-    Route::middleware('role:admin|doctor')->group( function() {
+    Route::middleware(['role:admin|doctor', 'hasProfile'])->group( function() {
         //PRESCRIPTIONS
         Route::get('/prescriptions/edit/{prescription}', PrescriptionComponent\PrescriptionEditFormComponent::class)->name('prescriptions.edit');
         Route::get('/prescriptions/restore/{prescription_id}', [PrescriptionComponent\PrescriptionViewComponent::class, 'restore'])->name('prescriptions.restore');
     });
 
     //ADMIN, RECEPTIONIST
-    Route::get('/appointments/add', AppointmentComponent\AppointmentAddFormComponent::class)->middleware('role:admin|receptionist')->name('appointments.add');
+    Route::get('/appointments/add', AppointmentComponent\AppointmentAddFormComponent::class)->middleware(['role:admin|receptionist', 'hasProfile'])->name('appointments.add');
 
     //DOCTOR
-    Route::middleware('role:doctor')->group( function() {
+    Route::middleware(['role:doctor', 'hasProfile'])->group( function() {
         //DOCUMENTS
         Route::get('/doctor/appointments/add', Doctor\AppointmentComponent\DoctorAppointmentAddFormComponent::class)->name('doctor.appointments.add');
 
@@ -131,7 +131,7 @@ Route::middleware('auth')->group( function() {
     });
 
     //PATIENT
-    Route::middleware('role:patient')->group( function() {
+    Route::middleware(['role:patient', 'hasProfile'])->group( function() {
         //APPOINTMENTS
         Route::get('/patient/appointments/add', Patient\AppointmentComponent\PatientAppointmentAddFormComponent::class)->name('patient.appointments.add');
         Route::get('/patient/appointments', Patient\AppointmentComponent\PatientAppointmentViewComponent::class)->name('patient.appointments.view');

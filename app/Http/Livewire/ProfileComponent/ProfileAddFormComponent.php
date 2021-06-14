@@ -40,7 +40,7 @@ class ProfileAddFormComponent extends Component
         ]);
         $this->profile->user_id = $this->user_id;
         $this->profile->save();
-        // $this->emit('saved');
-        return redirect('profile/view/' . $this->user_id);
+
+        return redirect()->route('profile.view', ['role' => Auth::user()->role->name, 'user_id' => Auth::user()->id]);
     }
 }
