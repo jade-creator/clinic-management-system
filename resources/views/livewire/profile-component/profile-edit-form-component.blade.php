@@ -1,41 +1,25 @@
-<div class="">
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+<div class="px-3 px-sm-4">
+    <div class="pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Profile</h1>
-        <div class="btn-toolbar mb-2 mb-md-0">
-        <div class="btn-group mr-2">
-            <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-            <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
-        </div>
-        <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-            This week
-        </button>
-        </div>
     </div>
     <form method="post" wire:submit.prevent="update">
+        @if ($role == 'patient')
         <div class="form-row">
             <div class="form-group col">
-                <label for="id">ID</label>
-                <input class="form-control" id="id" name="id" type="text" readonly placeholder="{{ $this->subEntity->id ?? 'Not Registered' }}">
+                <label for="name">Name</label>
+                <input type="text" class="form-control @error('user.name') is-invalid @enderror" id="name" name="name" required autofocus wire:model.defer="user.name">
+                @error('user.name')
+                    <div class="invalid-feedback">
+                        {{$message}}
+                    </div>
+                @enderror
             </div>
-            @if ($role == 'patient')
-                <div class="form-group col">
-                    <label for="status">Status</label>
-                    <input class="form-control" id="status" name="status" type="text" readonly wire:model.defer="status">
-                </div>
-            @else
-                <div class="form-group col">
-                    <label for="name">Name</label>
-                    <input type="text" class="form-control @error('user.name') is-invalid @enderror" id="name" name="name" required autofocus wire:model.defer="user.name">
-                    @error('user.name')
-                        <div class="invalid-feedback">
-                            {{$message}}
-                        </div>
-                    @enderror
-                </div>
-            @endif
+            <div class="form-group col">
+                <label for="status">Status</label>
+                <input class="form-control" id="status" name="status" type="text" readonly wire:model.defer="status">
+            </div>
         </div>
-        @if ($role == 'patient')
+        @else
             <div class="form-group">
                 <label for="name">Name</label>
                 <input type="text" class="form-control @error('user.name') is-invalid @enderror" id="name" name="name" required autofocus wire:model.defer="user.name">
@@ -46,6 +30,7 @@
                 @enderror
             </div>
         @endif
+
         <div class="form-row">
             <div class="form-group col">
                 <label for="birthdate">Birthdate</label>
@@ -102,9 +87,7 @@
             <div class="form-group">
                 <label for="note">Note</label>
                 <textarea class="form-control" id="note" name="note" required autofocus wire:model.defer="note" wire:loading.attr="disabled"
-                    @if (is_null($this->note))
-                        placeholder="Nothing to see here..."
-                    @endif>
+                        placeholder="...">
                 </textarea>
             </div>
         @endif

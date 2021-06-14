@@ -2,10 +2,12 @@
 
 namespace App\Http\Livewire\ProfileComponent;
 
+use App\Models\Patient;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Profile;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class ProfileEditFormComponent extends Component
@@ -20,23 +22,17 @@ class ProfileEditFormComponent extends Component
     public $status;
     public $note;
 
-    public function mount(string $role, int $user_id)
+    public function mount()
     {
-        Role::where('name', $role)->firstOrFail();
+        Role::where('name', $this->role)->firstOrFail();
 
-        $this->user = User::with(['profile', $role])
-                        ->findOrFail($user_id);
-
+        $this->user = User::with('profile')->findOrFail($this->user_id);
         $this->profile = $this->user->profile;
-        $this->subEntity = $this->user->$role;
 
-        if (is_null($this->subEntity)) {
-            abort(404);
-        }
-
-        if($role == 'patient'){
+        if($this->role == 'patient'){
+            $this->subEntity = Auth::user()->patient;
             $this->status = $this->subEntity->isActive ? 'Active' : 'Inactive';
-            $this->note = $this->subEntity->note; //need update method
+            $this->note = $this->subEntity->note;
         }
     }
 
@@ -61,5 +57,11 @@ class ProfileEditFormComponent extends Component
         $this->validate();
         $this->user->update();
         $this->profile->update();
+
+        if($this->role == 'patient'){
+            Patient::where('user_id', $this->user_id)->update([
+                'note' => $this->note
+            ]);
+        }
     }
 }
