@@ -21,7 +21,7 @@
 
     <form method="post" wire:submit.prevent="create">
         <div class="form-group">
-            <label for="category">My Name</label>
+            <label for="category">Category Name</label>
             <input type="text" class="form-control @error('category.name') is-invalid @enderror" id="category" name="category" required autofocus wire:model.defer="category.name" wire:loading.attr="disabled">
             @error('category.name')
                 <div class="invalid-feedback">
@@ -31,7 +31,7 @@
         </div>
         <div class="form-group">
             <label for="description">Description</label>
-            <textarea class="form-control @error('category.description') is-invalid @enderror" id="description" name="description" placeholder="lorem ipsum..." required autofocus wire:model.defer="category.description" wire:loading.attr="disabled"></textarea>
+            <textarea class="form-control @error('category.description') is-invalid @enderror" id="description" name="description" placeholder="..." required autofocus wire:model.defer="category.description" wire:loading.attr="disabled"></textarea>
             @error('category.description')
                 <div class="invalid-feedback">
                     {{$message}}

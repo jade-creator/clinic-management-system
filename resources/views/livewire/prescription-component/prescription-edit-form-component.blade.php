@@ -2,7 +2,7 @@
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Prescription Details</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
-            <a href="{{ route('prescriptions.add') }}">
+            <a href="{{ route('prescriptions.view') }}">
                 <button type="button" class="btn btn-sm btn-light border-2 border-secondary">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-list" width="22" height="22" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -84,7 +84,7 @@
         </div>
         <div class="form-group">
             <label for="medication">Medication</label>
-            <textarea class="form-control @error('prescription.medication') is-invalid @enderror" id="medication" name="medication" placeholder="lorem ipsum..." required autofocus wire:model.defer="prescription.medication"  wire:loading.attr="disabled"></textarea>
+            <textarea class="form-control @error('prescription.medication') is-invalid @enderror" id="medication" name="medication" placeholder="..." required autofocus wire:model.defer="prescription.medication"  wire:loading.attr="disabled"></textarea>
             @error('prescription.medication')
                 <div class="invalid-feedback">
                     {{$message}}
@@ -93,7 +93,7 @@
         </div>
         <div class="form-group">
             <label for="note">Note</label>
-            <textarea class="form-control @error('prescription.note') is-invalid @enderror" id="note" name="note" placeholder="lorem ipsum..." required autofocus wire:model.defer="prescription.note"  wire:loading.attr="disabled"></textarea>
+            <textarea class="form-control @error('prescription.note') is-invalid @enderror" id="note" name="note" placeholder="..." required autofocus wire:model.defer="prescription.note"  wire:loading.attr="disabled"></textarea>
             @error('prescription.note')
                 <div class="invalid-feedback">
                     {{$message}}

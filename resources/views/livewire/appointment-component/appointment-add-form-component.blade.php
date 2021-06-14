@@ -101,7 +101,7 @@
         </div>
         <div class="form-group">
             <label for="remarks">Remarks</label>
-            <textarea class="form-control" id="remarks" name="remarks" placeholder="lorem ipsum..." autofocus wire:model.defer="appointment.remarks"  wire:loading.attr="disabled"></textarea>
+            <textarea class="form-control" id="remarks" name="remarks" placeholder="Optional" autofocus wire:model.defer="appointment.remarks"  wire:loading.attr="disabled"></textarea>
         </div>
         <div class="form-group text-right">
             <button class="btn px-5 btn-primary" type="submit" wire:loading.attr="disabled">Save</button>
