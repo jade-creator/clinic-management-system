@@ -23,10 +23,6 @@ class User extends Authenticatable
         $this->hasOne(Patient::class);
     }
 
-    // public function patientAppointments(){ return
-    //     $this->hasManyThrough(Appointment::class, Patient::class);
-    // }
-
     public function doctor(){ return
         $this->hasOne(Doctor::class);
     }
@@ -34,6 +30,18 @@ class User extends Authenticatable
     public function receptionist(){ return
         $this->hasOne(Receptionist::class);
     }
+
+    public static function search($search)
+    {
+        $search = '%'.$search.'%';
+
+        return empty($search) ? static::query()
+            : static::where(function ($query) use ($search){
+                return $query->where('name', 'LIKE', '%'.$search.'%')
+                        ->orWhere('email', 'LIKE', '%'.$search.'%');
+            });
+    }
+
     /**
      * The attributes that are mass assignable.
      *

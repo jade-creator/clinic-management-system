@@ -13,8 +13,10 @@ use App\Http\Livewire\PatientComponent\PatientViewComponent;
 use App\Http\Livewire\PaymentComponent;
 use App\Http\Livewire\PrescriptionComponent;
 use App\Http\Livewire\ProfileComponent;
+use App\Http\Livewire\ReceptionistComponent\ReceptionistViewComponent;
 use App\Http\Livewire\StockComponent;
 use App\Http\Livewire\TreatmentComponent;
+use App\Http\Livewire\UserComponent\UserViewComponent;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -73,13 +75,13 @@ Route::middleware('auth')->group( function() {
         Route::get('/stocks/edit/{stock}', StockComponent\StockEditFormComponent::class)->name('stocks.edit');
         Route::get('/stocks/restore/{stock_id}', [StockComponent\StockViewComponent::class, 'restore'])->name('stocks.restore');
 
+        //DEPOSITS
+        Route::get('/deposits/add', DepositComponent\DepositAddFormComponent::class)->name('deposits.add');
+
         //PAYMENTS
         Route::get('/payments/add', PaymentComponent\PaymentAddFormComponent::class)->name('payments.add');
         Route::get('/payments', PaymentComponent\PaymentViewComponent::class)->name('payments.view');
         Route::get('/payments/{paymentId}/deposit/add', PaymentComponent\PaymentAddDepositFormComponent::class)->name('payments.deposit.add');
-
-        //PATIENTS
-        Route::get('/patients', PatientViewComponent::class)->name('patients.view');
 
         //CASES
         Route::get('/case-histories/add', HistoryComponent\HistoryAddFormComponent::class)->name('histories.add');
@@ -95,9 +97,15 @@ Route::middleware('auth')->group( function() {
 
         //DOCTORS
         Route::get('/doctors', DoctorViewComponent::class)->name('doctors.view');
-        
-        //DEPOSITS
-        Route::get('/deposits/add', DepositComponent\DepositAddFormComponent::class)->name('deposits.add');
+
+        //RECEPTIONISTS
+        Route::get('/receptionists', ReceptionistViewComponent::class)->name('receptionists.view');
+
+        //PATIENTS
+        Route::get('/patients', PatientViewComponent::class)->name('patients.view');
+
+        //USERS
+        Route::get('/users', UserViewComponent::class)->name('users.view');
     });
 
     //ADMIN

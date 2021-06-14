@@ -38,4 +38,14 @@ class Patient extends Model
     public function documents() { return
         $this->hasMany(Document::class);
     }
+
+    public static function search($search)
+    {
+        $search = '%'.$search.'%';
+
+        return empty($search) ? static::query()
+            : static::where(function ($query) use ($search){
+                return $query->where('id', 'LIKE', '%'.$search.'%');
+            });
+    }
 }
