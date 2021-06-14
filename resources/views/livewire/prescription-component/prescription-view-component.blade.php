@@ -1,9 +1,17 @@
 <div class="px-3 px-sm-4">
     <x-table title="Prescriptions" placeholder="ID, name, medication, note">
         <x-slot name="button">
-            <a href="{{ route('prescriptions.add') }}">
-                <button class="btn btn-primary">Add Prescription</button>
-            </a>
+            @if (auth()->user()->role->name == 'admin')
+                <a href="{{ route('prescriptions.add') }}">
+                    <button class="btn btn-primary">Add Prescription</button>
+                </a>
+            @endif
+
+            @if (auth()->user()->role->name == 'doctor')
+                <a href="{{ route('doctor.prescriptions.add') }}">
+                    <button class="btn btn-primary">Add Prescription</button>
+                </a>
+            @endif
         </x-slot>
 
         <x-slot name="filter">
@@ -19,7 +27,7 @@
                         <th class="text-left" scope="col">Patient Name</th>
                         <th class="text-left" scope="col">Medication</th>
                         <th class="text-left" scope="col">Note</th>
-                        <th class="text-left" scope="col">Doctor ID</th>
+                        <th class="text-center" scope="col">Doctor ID</th>
                         <th class="text-left" scope="col">Doctor Name</th>
                         @if (auth()->user()->role->name == 'doctor' || auth()->user()->role->name == 'admin')
                             <th class="text-center" scope="col">Option</th>
@@ -33,7 +41,7 @@
                             <td class="text-left">{{ $prescription->patient->user->name }}</td>
                             <td class="text-left">{{ $prescription->medication }}</td>
                             <td class="text-left">{{ $prescription->note }}</td>
-                            <td class="text-left">{{ $prescription->doctor->id }}</td>
+                            <td class="text-center">{{ $prescription->doctor->id }}</td>
                             <td class="text-left">{{ $prescription->doctor->user->name }}</td>
                             @if (auth()->user()->role->name == 'doctor' || auth()->user()->role->name == 'admin')
                                 <td class="text-center">

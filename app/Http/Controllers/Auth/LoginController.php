@@ -33,7 +33,7 @@ class LoginController extends Controller
     {
         $role = Auth::user()->role->name;
         switch ($role) {
-            case 'patient':
+            case 'admin':
                 return '/profile'; //will change
                 break;
 
@@ -42,6 +42,10 @@ class LoginController extends Controller
                 break;
 
             case 'receptionist':
+                return '/profile'; //will change
+                break;
+
+            case 'patient':
                 return '/profile'; //will change
                 break;
             

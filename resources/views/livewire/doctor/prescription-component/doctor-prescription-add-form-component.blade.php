@@ -2,7 +2,7 @@
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Prescription Details</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
-            <a href="{{ route('prescriptions.add') }}">
+            <a href="{{ route('prescriptions.view') }}">
                 <button type="button" class="btn btn-sm btn-light border-2 border-secondary">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-list" width="22" height="22" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -53,11 +53,7 @@
             <div class="form-group col">
                 <label for="doctor_id">Doctor ID</label>
                 <select class="form-control @error('prescription.doctor_id') is-invalid @enderror" name="doctor_id" id="doctor_id" autofocus wire:model="prescription.doctor_id" wire:loading.attr="disabled">
-                    @forelse ($this->doctors as $doctor)
-                        <option value="{{ $doctor->id }}">{{ $doctor->id }}</option>
-                    @empty
-                        <option value="">No records</option>
-                    @endforelse
+                    <option value="{{ $this->doctor->id }}">{{ $this->doctor->id }}</option>
                 </select>
                 @error('prescription.doctor_id')
                     <div class="invalid-feedback">
@@ -67,12 +63,8 @@
             </div>
             <div class="form-group col">
                 <label for="doctor_name">Doctor Name</label>
-                <select class="form-control" name="doctor_name" id="doctor_name" autofocus wire:model="prescription.doctor_id" wire:loading.attr="disabled">
-                    @forelse ($this->doctors as $doctor)
-                        <option value="{{ $doctor->id }}">{{ $doctor->user->name }}</option>
-                    @empty
-                        <option value="">No records</option>
-                    @endforelse
+                <select class="form-control" name="doctor_name" id="doctor_name" autofocus wire:loading.attr="disabled">
+                    <option value="{{ $this->doctor->id }}">{{ auth()->user()->name }}</option>
                 </select>
             </div>
         </div>

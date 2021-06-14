@@ -1,21 +1,19 @@
 <?php
 
-namespace App\Http\Livewire\PrescriptionComponent;
+namespace App\Http\Livewire\Doctor\PrescriptionComponent;
 
-use App\Models\Doctor;
 use App\Models\Patient;
 use App\Models\Prescription;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
-class PrescriptionAddFormComponent extends Component
+class DoctorPrescriptionAddFormComponent extends Component
 {
     public Prescription $prescription;
-    public $doctor_name;
     public $patient_name;
-    
+
     public function render() { return 
-        view('livewire.prescription-component.prescription-add-form-component');
+        view('livewire.doctor.prescription-component.doctor-prescription-add-form-component');
     }
 
     public function mount() {
@@ -52,21 +50,13 @@ class PrescriptionAddFormComponent extends Component
         $this->prescription->patient_id = $this->patient_name;
     }
 
-    public function updatedPrescriptionDoctorId() { return
-        $this->doctor_name = $this->prescription->doctor_id;
-    }
-
-    public function updatedDoctorName() { return
-        $this->prescription->doctor_id = $this->doctor_name;
-    }
-
     public function getPatientsProperty() { return
         Patient::with(['user:id,name'])->get(['id', 'user_id']);
     }
 
-    public function getDoctorsProperty()
+    public function getDoctorProperty()
     {
-        return Doctor::with('user:id,name')
-                ->get(['id', 'user_id']);
+        $user = Auth::user()->load('doctor:id,user_id');
+        return $user->doctor;
     }
 }
