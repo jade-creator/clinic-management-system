@@ -12,8 +12,8 @@
                         <line x1="5" y1="6" x2="5" y2="6.01"></line>
                         <line x1="5" y1="12" x2="5" y2="12.01"></line>
                         <line x1="5" y1="18" x2="5" y2="18.01"></line>
-                     </svg>
-                    View List
+                    </svg>
+                    <span class="d-none d-md-inline-block">View List</span>
                 </button>
             </a>
         </div>
@@ -29,7 +29,7 @@
             <input wire:model.defer="patientName" disabled type="text" class="form-control" id="name" name="name">
         </div>
         <div class="form-row">
-            <div class="form-group col">
+            <div class="form-group col-md-6">
                 <label for="schedule">Schedule</label>
                 <input type="datetime-local" class="form-control @error('appointment.scheduled_at') is-invalid @enderror" id="schedule" name="schedule" required autofocus wire:model.defer="appointment.scheduled_at" wire:loading.attr="disabled">
                 @error('appointment.scheduled_at')
@@ -38,7 +38,7 @@
                     </div>
                 @enderror
             </div> 
-            <div class="form-group col">
+            <div class="form-group col-md-6">
                 <label for="status_id">Status</label>
                 <select id="status_id" name="status_id" class="form-control @error('appointment.status_id') is-invalid @enderror" required autofocus wire:model.defer="appointment.status_id" wire:loading.attr="disabled">
                     <option value="{{ $status->id }}">{{ $status->name }}</option>
@@ -59,10 +59,8 @@
                 </div>
             @enderror
         </div>
-        @if (auth()->user()->role->name == 'patient')
-            <div class="form-group text-right">
-                <button class="btn px-5 btn-primary" type="submit" wire:loading.attr="disabled">Update</button>
-            </div>
-        @endif
+        <div class="form-group text-right">
+            <button class="btn px-5 btn-primary" type="submit" wire:loading.attr="disabled">Update</button>
+        </div>
     </form>
 </div>

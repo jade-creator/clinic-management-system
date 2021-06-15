@@ -6,7 +6,7 @@
         <x-slot name="filter">
         </x-slot>
 
-        <div name="slot">
+        <div name="slot" class="table-responsive">
             <table class="table table-hover table-bordered table-light">
                 <thead>
                     <tr>

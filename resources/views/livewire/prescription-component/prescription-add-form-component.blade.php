@@ -12,8 +12,8 @@
                         <line x1="5" y1="6" x2="5" y2="6.01"></line>
                         <line x1="5" y1="12" x2="5" y2="12.01"></line>
                         <line x1="5" y1="18" x2="5" y2="18.01"></line>
-                     </svg>
-                    View List
+                    </svg>
+                    <span class="d-none d-md-inline-block">View List</span>
                 </button>
             </a>
         </div>
@@ -21,9 +21,9 @@
     
     <form method="post" wire:submit.prevent="create">
         <div class="form-row">
-            <div class="form-group col">
+            <div class="form-group col-md-6">
                 <label for="patient_id">Patient ID</label>
-                <select class="form-control @error('prescription.patient_id') is-invalid @enderror" name="patient_id" id="patient_id" autofocus wire:model="prescription.patient_id" wire:loading.attr="disabled">
+                <select class="form-control @error('prescription.patient_id') is-invalid @enderror" name="patient_id" id="patient_id" autofocus required wire:model="prescription.patient_id" wire:loading.attr="disabled">
                     <option value="">Choose a Patient ID</option>
                     @forelse ($this->patients as $patient)
                         <option value="{{ $patient->id }}">{{ $patient->id }}</option>
@@ -37,9 +37,9 @@
                     </div>
                 @enderror
             </div>
-            <div class="form-group col">
+            <div class="form-group col-md-6">
                 <label for="patient_name">Patient Name</label>
-                <select class="form-control" name="patient_name" id="patient_name" autofocus wire:model="patient_name" wire:loading.attr="disabled">
+                <select class="form-control" name="patient_name" id="patient_name" autofocus required wire:model="patient_name" wire:loading.attr="disabled">
                     <option value="">Choose a Patient Name</option>
                     @forelse ($this->patients as $patient)
                         <option value="{{ $patient->id }}">{{ $patient->user->name }}</option>
@@ -50,9 +50,10 @@
             </div>
         </div>
         <div class="form-row">
-            <div class="form-group col">
+            <div class="form-group col-md-6">
                 <label for="doctor_id">Doctor ID</label>
-                <select class="form-control @error('prescription.doctor_id') is-invalid @enderror" name="doctor_id" id="doctor_id" autofocus wire:model="prescription.doctor_id" wire:loading.attr="disabled">
+                <select class="form-control @error('prescription.doctor_id') is-invalid @enderror" name="doctor_id" id="doctor_id" autofocus required wire:model="prescription.doctor_id" wire:loading.attr="disabled">
+                    <option value="">Choose a Doctor ID</option>
                     @forelse ($this->doctors as $doctor)
                         <option value="{{ $doctor->id }}">{{ $doctor->id }}</option>
                     @empty
@@ -65,9 +66,10 @@
                     </div>
                 @enderror
             </div>
-            <div class="form-group col">
+            <div class="form-group col-md-6">
                 <label for="doctor_name">Doctor Name</label>
-                <select class="form-control" name="doctor_name" id="doctor_name" autofocus wire:model="prescription.doctor_id" wire:loading.attr="disabled">
+                <select class="form-control" name="doctor_name" id="doctor_name" autofocus required wire:model="prescription.doctor_id" wire:loading.attr="disabled">
+                    <option value="">Choose a Doctor Name</option>
                     @forelse ($this->doctors as $doctor)
                         <option value="{{ $doctor->id }}">{{ $doctor->user->name }}</option>
                     @empty

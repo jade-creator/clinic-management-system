@@ -3,9 +3,12 @@
         <h1 class="h2">Profile</h1>
     </div>
     <form method="post" wire:submit.prevent="update">
+        <div class="form-row">
+            <img class="form-control w-25 h-25 mb-3" src="https://www.vippng.com/png/detail/416-4161690_empty-profile-picture-blank-avatar-image-circle.png" alt="avatar"/>
+        </div>
         @if ($role == 'patient')
         <div class="form-row">
-            <div class="form-group col">
+            <div class="form-group col-md-6">
                 <label for="name">Name</label>
                 <input type="text" class="form-control @error('user.name') is-invalid @enderror" id="name" name="name" required autofocus wire:model.defer="user.name">
                 @error('user.name')
@@ -14,7 +17,7 @@
                     </div>
                 @enderror
             </div>
-            <div class="form-group col">
+            <div class="form-group col-md-6">
                 <label for="status">Status</label>
                 <input class="form-control" id="status" name="status" type="text" readonly wire:model.defer="status">
             </div>
@@ -32,7 +35,7 @@
         @endif
 
         <div class="form-row">
-            <div class="form-group col">
+            <div class="form-group col-md-6">
                 <label for="birthdate">Birthdate</label>
                 <input type="date" class="form-control @error('profile.birthdate') is-invalid @enderror" id="birthdate" name="birthdate" required autofocus wire:model.defer="profile.birthdate" wire:loading.attr="disabled">
                 @error('profile.birthdate')
@@ -41,7 +44,7 @@
                     </div>
                 @enderror
             </div>
-            <div class="form-group col">
+            <div class="form-group col-md-6">
                 <label for="mobileNumber">Phone Number</label>
                 <input type="text" class="form-control @error('profile.phone_number') is-invalid @enderror" id="phone_number" name="phone_number" required autofocus wire:model.defer="profile.phone_number" wire:loading.attr="disabled">
                 @error('profile.phone_number')
@@ -52,7 +55,7 @@
             </div>
         </div>
         <div class="form-row">
-            <div class="form-group col">
+            <div class="form-group col-md-6">
                 <label for="sex">Sex</label>
                 <select id="sex" name="sex" class="form-control @error('profile.sex') is-invalid @enderror" required autofocus wire:model.defer="profile.sex" wire:loading.attr="disabled">
                   <option value="m">Male</option>
@@ -64,7 +67,7 @@
                     </div>
                 @enderror
             </div>
-            <div class="form-group col">
+            <div class="form-group col-md-6">
                 <label for="email">Email address</label>
                 <input type="email" class="form-control @error('user.email') is-invalid @enderror" id="email" aria-describedby="emailHelp" required autofocus wire:model.defer="user.email" wire:loading.attr="disabled">
                 @error('user.email')

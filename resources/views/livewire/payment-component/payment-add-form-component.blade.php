@@ -14,13 +14,13 @@
                             <line x1="5" y1="12" x2="5" y2="12.01"></line>
                             <line x1="5" y1="18" x2="5" y2="18.01"></line>
                         </svg>
-                        View Payment List
+                        <span class="d-none d-md-inline-block">View List</span>
                     </button>
                 </a>
             </div>
         </div>
         <div class="row">
-            <div class="col-4">
+            <div class="col-12 col-xl-4">
                 <form method="post" wire:submit.prevent="create">
                     <div class="form-group">
                         <label for="patient_id">Patient ID</label>
@@ -125,12 +125,12 @@
                     @endif
                 </form>
             </div>
-            <div class="col-8">
+            <div class="col-12 col-xl-8">
                 <div class="form-group">
                     <div class="row">
                         <div class="col">
                             <label for="treatment_id">Treatment Name</label>
-                            <select class="form-control @error('treatment_id') is-invalid @enderror" name="treatment_id" autofocus wire:model.defer="treatment_id" wire:loading.attr="disabled">
+                            <select class="form-control @error('treatment_id') is-invalid @enderror" name="treatment_id" autofocus wire:model="treatment_id" wire:loading.attr="disabled">
                                 <option value="">-- choose treatment --</option>
                                 @forelse ($this->collectionTreatments as $treatment)
                                     <option value="{{ $treatment->id }}">{{ $treatment->name }}</option>
@@ -146,7 +146,7 @@
                         </div>
                         <div class="col">
                             <label for="quantity">Quantity</label>
-                            <input type="number" class="form-control @error('quantity') is-invalid @enderror" name="quantity" required autofocus wire:model.defer="quantity" wire:loading.attr="disabled">
+                            <input type="number" class="form-control @error('quantity') is-invalid @enderror" name="quantity" required autofocus wire:model="quantity" wire:loading.attr="disabled">
                             @error('quantity')
                                 <div class="invalid-feedback">
                                     {{$message}}
@@ -154,7 +154,17 @@
                             @enderror
                         </div>
                         <div class="col-2 d-flex align-items-end">
-                            <button class="btn btn-primary" wire:click.prevent="addItem">Add Item</button>
+                            <button class="btn btn-primary" wire:click.prevent="addItem" 
+                                @if (empty($this->treatment_id) || empty($this->quantity))
+                                    disabled
+                                @endif>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                                <span class="d-none d-md-inline-block">Add</span>
+                            </button>
                         </div>
                     </div>
                 </div>

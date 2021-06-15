@@ -29,7 +29,7 @@
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" value="qwert@1Q">
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -66,6 +66,37 @@
                         </div>
                     </form>
                 </div>
+            </div>
+        </div>
+
+        <div class="col-md-8 mt-5">
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th class="text-center" scope="col">Role</th>
+                            <th class="text-center" scope="col">Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            <tr>
+                                <td class="text-center" scope="row">Admin</td>
+                                <td>admin@gmail.com</td>
+                            </tr>
+                            <tr>
+                                <td class="text-center" scope="row">Doctor</td>
+                                <td>doctor@gmail.com</td>
+                            </tr>
+                            <tr>
+                                <td class="text-center" scope="row">Receptionist</td>
+                                <td>receptionist@gmail.com</td>
+                            </tr>
+                            <tr>
+                                <td class="text-center" scope="row">Patient</td>
+                                <td>patient@gmail.com</td>
+                            </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
