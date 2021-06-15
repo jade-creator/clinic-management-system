@@ -9,7 +9,7 @@
          </svg>
     </button>
     <a class="c-header-brand d-lg-none" href="#">
-        <img src="https://drive.google.com/uc?id=1WZ__-_MV4wloVP9fiY7I8ygaDkMx3fCK" alt="CoreUI Logo" style="width: 100px;">
+        <img src="https://drive.google.com/uc?id=1WZ__-_MV4wloVP9fiY7I8ygaDkMx3fCK" alt="Clinic's Logo" style="width: 100px;">
     </a>
 
     <button class="c-header-toggler c-class-toggler mfs-3 d-md-down-none" type="button" data-target="#sidebar"
@@ -47,54 +47,24 @@
                 <div class="dropdown-header bg-light py-2">
                     <strong>Account</strong>
                 </div>
-
-                <a class="dropdown-item" href="#">
-                    <svg class="c-icon mr-2">
-                        <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-bell"></use>
-                    </svg>
-                    Updates
-                    <span class="badge badge-info ml-auto">42</span>
-                </a>
-                    
-                <a class="dropdown-item" href="#">
-                    <svg class="c-icon mr-2">
-                        <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-envelope-open"></use>
-                    </svg> 
-                    Messages
-                    <span class="badge badge-success ml-auto">42</span>
-                </a>
                 
-                <a class="dropdown-item" href="#">
-                    <svg class="c-icon mr-2">
-                        <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-task"></use>
-                    </svg> 
-                    Tasks
-                    <span class="badge badge-danger ml-auto">42</span>
-                </a>
-                
-                <a class="dropdown-item" href="#">
-                    <svg class="c-icon mr-2">
-                        <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-comment-square"></use>
-                    </svg> 
-                    Comments
-                    <span class="badge badge-warning ml-auto">42</span>
-                </a>
-
-                <div class="dropdown-divider"></div>
-                
-                <a class="dropdown-item" href="#">
-                    <svg class="c-icon mr-2">
-                        <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-lock-locked"></use>
-                    </svg> 
-                    Lock Account
+                <a class="dropdown-item" href="{{ route('profile.view', ['role' => auth()->user()->role->name, 'user_id' => auth()->user()->id]) }}">
+                    <svg class="mr-1" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                        <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
+                     </svg>
+                    Profile
                 </a>
                 
                 <a class="dropdown-item" href="{{ route('logout') }}"
                         onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">
-                    <svg class="c-icon mr-2">
-                        <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-account-logout"></use>
-                    </svg> 
+                    <svg class="mr-1" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2"></path>
+                        <path d="M7 12h14l-3 -3m0 6l3 -3"></path>
+                     </svg>
                     Logout
                 </a>
 

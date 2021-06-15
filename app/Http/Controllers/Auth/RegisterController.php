@@ -34,16 +34,7 @@ class RegisterController extends Controller
 
     public function redirectTo()
     {
-        $role = Auth::user()->role->name;
-        switch ($role) {
-            case 'patient':
-                return '/profile'; //will change
-                break;
-            
-            default:
-                return redirect(RouteServiceProvider::HOME);
-                break;
-        }
+        return '/profile';
     }
 
     /**

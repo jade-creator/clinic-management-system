@@ -1,4 +1,4 @@
-<div class="">
+<div class="px-3 px-sm-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Appointment Details</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
@@ -12,8 +12,8 @@
                         <line x1="5" y1="6" x2="5" y2="6.01"></line>
                         <line x1="5" y1="12" x2="5" y2="12.01"></line>
                         <line x1="5" y1="18" x2="5" y2="18.01"></line>
-                     </svg>
-                    View List
+                    </svg>
+                    <span class="d-none d-md-inline-block">View List</span>
                 </button>
             </a>
         </div>
@@ -21,9 +21,9 @@
 
     <form method="post" wire:submit.prevent="create">
         <div class="form-row">
-            <div class="form-group col">
+            <div class="form-group col-md-6">
                 <label for="patient_id">Patient ID</label>
-                <select class="form-control @error('appointment.patient_id') is-invalid @enderror" name="patient_id" id="patient_id" autofocus wire:model="appointment.patient_id" wire:loading.attr="disabled">
+                <select class="form-control @error('appointment.patient_id') is-invalid @enderror" name="patient_id" id="patient_id" autofocus required wire:model="appointment.patient_id" wire:loading.attr="disabled">
                     <option value="">Choose a Patient ID</option>
                     @forelse ($this->patients as $patient)
                         <option value="{{ $patient->id }}">{{ $patient->id }}</option>
@@ -37,9 +37,9 @@
                     </div>
                 @enderror
             </div>
-            <div class="form-group col">
+            <div class="form-group col-md-6">
                 <label for="patient_name">Patient Name</label>
-                <select class="form-control" name="patient_name" id="patient_name" autofocus wire:model="patient_name" wire:loading.attr="disabled">
+                <select class="form-control" name="patient_name" id="patient_name" autofocus required wire:model="patient_name" wire:loading.attr="disabled">
                     <option value="">Choose a Patient Name</option>
                     @forelse ($this->patients as $patient)
                         <option value="{{ $patient->id }}">{{ $patient->user->name }}</option>
@@ -50,9 +50,9 @@
             </div>
         </div>
         <div class="form-row">
-            <div class="form-group col">
+            <div class="form-group col-md-6">
                 <label for="doctor_id">Doctor ID</label>
-                <select class="form-control @error('appointment.doctor_id') is-invalid @enderror" name="doctor_id" id="doctor_id" autofocus wire:model="appointment.doctor_id" wire:loading.attr="disabled">
+                <select class="form-control @error('appointment.doctor_id') is-invalid @enderror" name="doctor_id" id="doctor_id" autofocus required wire:model="appointment.doctor_id" wire:loading.attr="disabled">
                     <option value="{{ $this->doctor->id }}">{{ $this->doctor->id }}</option>
                 </select>
                 @error('appointment.doctor_id')
@@ -61,15 +61,15 @@
                     </div>
                 @enderror
             </div>
-            <div class="form-group col">
+            <div class="form-group col-md-6">
                 <label for="doctor_name">Doctor Name</label>
-                <select class="form-control" name="doctor_name" id="doctor_name" autofocus wire:model="appointment.doctor_id" wire:loading.attr="disabled">
+                <select class="form-control" name="doctor_name" id="doctor_name" autofocus required wire:model="appointment.doctor_id" wire:loading.attr="disabled">
                     <option value="{{ $this->doctor->id }}">{{ auth()->user()->name }}</option>
                 </select>
             </div>
         </div>
         <div class="form-row">
-            <div class="form-group col">
+            <div class="form-group col-md-6">
                 <label for="schedule">Schedule</label>
                 <input type="datetime-local"  class="form-control @error('appointment.scheduled_at') is-invalid @enderror" id="schedule" name="schedule" required autofocus wire:model.defer="appointment.scheduled_at" wire:loading.attr="disabled">
                 @error('appointment.scheduled_at')
@@ -78,7 +78,7 @@
                     </div>
                 @enderror
             </div> 
-            <div class="form-group col">
+            <div class="form-group col-md-6">
                 <label for="status_id">Status</label>
                 <select id="status_id" name="status_id" class="form-control @error('appointment.status_id') is-invalid @enderror" required autofocus wire:model.defer="appointment.status_id" wire:loading.attr="disabled">
                     <option value="">Choose a status</option>
@@ -97,7 +97,7 @@
         </div>
         <div class="form-group">
             <label for="remarks">Remarks</label>
-            <textarea class="form-control @error('appointment.remarks') is-invalid @enderror" id="remarks" name="remarks" placeholder="lorem ipsum..." required autofocus wire:model.defer="appointment.remarks"  wire:loading.attr="disabled"></textarea>
+            <textarea class="form-control @error('appointment.remarks') is-invalid @enderror" id="remarks" name="remarks" placeholder="..." required autofocus wire:model.defer="appointment.remarks"  wire:loading.attr="disabled"></textarea>
             @error('appointment.remarks')
                 <div class="invalid-feedback">
                     {{$message}}

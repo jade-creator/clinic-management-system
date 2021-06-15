@@ -7,7 +7,10 @@
 
     <form method="post" wire:submit.prevent="create">
         <div class="form-row">
-            <div class="form-group col">
+            <img class="form-control w-25 h-25 mb-3" src="https://www.vippng.com/png/detail/416-4161690_empty-profile-picture-blank-avatar-image-circle.png" alt="avatar"/>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
                 <label for="birthdate">Birthdate</label>
                 <input type="date" class="form-control @error('profile.birthdate') is-invalid @enderror" id="birthdate" name="birthdate" required autofocus wire:model.defer="profile.birthdate" wire:loading.attr="disabled">
                 @error('profile.birthdate')
@@ -16,7 +19,7 @@
                     </div>
                 @enderror
             </div>
-            <div class="form-group col">
+            <div class="form-group col-md-6">
                 <label for="mobileNumber">Phone Number</label>
                 <input type="text" class="form-control @error('profile.phone_number') is-invalid @enderror" id="phone_number" name="phone_number" required autofocus wire:model.defer="profile.phone_number" wire:loading.attr="disabled">
                 @error('profile.phone_number')
@@ -27,7 +30,7 @@
             </div>
         </div>
         <div class="form-row">
-            <div class="form-group col">
+            <div class="form-group col-md-6">
                 <label for="sex">Sex</label>
                 <select id="sex" name="sex" class="form-control @error('profile.sex') is-invalid @enderror" required autofocus wire:model.defer="profile.sex" wire:loading.attr="disabled">
                   <option value="m">Male</option>
@@ -39,7 +42,7 @@
                     </div>
                 @enderror
             </div>
-            <div class="form-group col">
+            <div class="form-group col-md-6">
                 <label for="homeAddress">Address</label>
                 <input type="text" class="form-control @error('profile.address') is-invalid @enderror" id="address" name="address" required autofocus wire:model.defer="profile.address" wire:loading.attr="disabled">
                 @error('profile.address')

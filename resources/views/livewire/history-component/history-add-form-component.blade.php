@@ -12,8 +12,8 @@
                         <line x1="5" y1="6" x2="5" y2="6.01"></line>
                         <line x1="5" y1="12" x2="5" y2="12.01"></line>
                         <line x1="5" y1="18" x2="5" y2="18.01"></line>
-                     </svg>
-                    View List
+                    </svg>
+                    <span class="d-none d-md-inline-block">View List</span>
                 </button>
             </a>
         </div>
@@ -21,10 +21,10 @@
 
     <form method="post" wire:submit.prevent="create">
         <div class="form-row">
-            <div class="form-group col">
+            <div class="form-group col-md-6">
                 <label for="patient_id">Patient ID</label>
                 <select id="patient_id" name="patient_id" class="form-control @error('history.patient_id') is-invalid @enderror" required autofocus wire:model="history.patient_id" wire:loading.attr="disabled">
-                    <option value="">-- choose patient id --</option>
+                    <option value="">Choose Patient ID</option>
                     @forelse ($this->patients as $patient)
                         <option value="{{ $patient->id }}">{{ $patient->id }}</option>
                     @empty
@@ -37,10 +37,10 @@
                     </div>
                 @enderror
             </div>
-            <div class="form-group col">
+            <div class="form-group col-md-6">
                 <label for="patient_name">Patient Name</label>
                 <select id="patient_name" name="patient_name" class="form-control" required autofocus wire:model="patient_name" wire:loading.attr="disabled">
-                    <option value="">-- choose patient name --</option>
+                    <option value="">Choose Patient Name</option>
                     @forelse ($this->patients as $patient)
                         <option value="{{ $patient->id }}">{{ $patient->user->name }}</option>
                     @empty

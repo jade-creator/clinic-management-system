@@ -4,17 +4,19 @@
         </x-slot>
 
         <x-slot name="filter">
-            <select name="roles" id="roles" class="custom-select mx-1" wire:model="role">
-                <option value="">-- select role --</option>
-                @forelse ($this->roles as $role)
-                    <option value="{{ $role->name }}">{{ $role->name }}</option>
-                @empty
-                    <option value="">N/A</option>   
-                @endforelse
-            </select>
+            <div class="col-lg-12 mb-2 mb-lg-0">
+                <select name="roles" id="roles" class="custom-select" wire:model="role">
+                    <option value="">-- select role --</option>
+                    @forelse ($this->roles as $role)
+                        <option value="{{ $role->name }}">{{ $role->name }}</option>
+                    @empty
+                        <option value="">N/A</option>   
+                    @endforelse
+                </select>
+            </div>
         </x-slot>
 
-        <div name="slot">
+        <div name="slot" class="table-responsive">
             <table class="table table-hover table-bordered table-light">
                 <thead>
                     <tr>

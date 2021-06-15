@@ -12,8 +12,8 @@
                         <line x1="5" y1="6" x2="5" y2="6.01"></line>
                         <line x1="5" y1="12" x2="5" y2="12.01"></line>
                         <line x1="5" y1="18" x2="5" y2="18.01"></line>
-                     </svg>
-                    View List
+                    </svg>
+                    <span class="d-none d-md-inline-block">View List</span>
                 </button>
             </a>
         </div>
@@ -25,7 +25,7 @@
 
     <form method="post" wire:submit.prevent="update">
         <div class="form-row">
-            <div class="form-group col">
+            <div class="form-group col-md-6">
                 <label for="patient_id">Patient ID</label>
                 <select id="patient_id" name="patient_id" class="form-control @error('document.patient_id') is-invalid @enderror" disabled wire:model="document.patient_id">
                     @forelse ($this->patients as $patient)
@@ -40,7 +40,7 @@
                     </div>
                 @enderror
             </div>
-            <div class="form-group col">
+            <div class="form-group col-md-6">
                 <label for="patient_name">Patient Name</label>
                 <select id="patient_name" name="patient_name" class="form-control" disabled wire:model="patient_name">
                     @forelse ($this->patients as $patient)
@@ -52,7 +52,7 @@
             </div>
         </div>
         <div class="form-group row">
-            <div class="form-group col">
+            <div class="form-group col-md-6">
                 <label for="date">Date</label>
                 <input id="date" name="date" type="date" class="form-control @error('document.date') is-invalid @enderror" required autofocus wire:model.defer="document.date" wire:loading.attr="disabled">
                 @error('document.date')
@@ -61,7 +61,7 @@
                     </div>
                 @enderror
             </div> 
-            <div class="form-group col">
+            <div class="form-group col-md-6">
                 <label for="document">Document</label>
                 <input type="text" name="document" id="document" class="form-control" readonly wire:model="document_file">
             </div>

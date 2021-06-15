@@ -32,12 +32,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::middleware('auth')->group( function() {
     //PROFILE
@@ -132,6 +132,9 @@ Route::middleware('auth')->group( function() {
 
     //PATIENT
     Route::middleware(['role:patient', 'hasProfile'])->group( function() {
+        //DASHBOARD
+        Route::get('/patient/dashboard', Patient\DashboardComponent\PatientDashboardComponent::class)->name('patient.dashboard.view');
+        
         //APPOINTMENTS
         Route::get('/patient/appointments/add', Patient\AppointmentComponent\PatientAppointmentAddFormComponent::class)->name('patient.appointments.add');
         Route::get('/patient/appointments', Patient\AppointmentComponent\PatientAppointmentViewComponent::class)->name('patient.appointments.view');
@@ -146,8 +149,5 @@ Route::middleware('auth')->group( function() {
         //PAYMENTS
         Route::get('/patient/payments', Patient\PaymentComponent\PatientPaymentViewComponent::class)->name('patient.payments.view');
         Route::get('/patient/payments/pdf', [Patient\PaymentComponent\PaymentPdfComponent::class, 'show'])->name('patient.payment.pdf');
-
-        //DASHBOARD
-        Route::get('/patient/dashboard', Patient\DashboardComponent\PatientDashboardComponent::class)->name('patient.dashboard.view');
     });
 });

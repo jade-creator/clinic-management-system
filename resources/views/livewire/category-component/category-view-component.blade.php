@@ -2,7 +2,14 @@
     <x-table title="Categories" placeholder="ID, Name, Description">
         <x-slot name="button">
             <a href="{{ route('categories.add') }}">
-                <button class="btn btn-primary">Add Category</button>
+                <button class="btn btn-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg> 
+                    <span class="d-none d-md-inline-block">Add Category</span>
+                </button>
             </a>
         </x-slot>
 
@@ -11,7 +18,7 @@
 
         @include('partials.alerts')
 
-        <div name="slot">
+        <div name="slot" class="table-responsive">
             <table class="table table-hover table-bordered table-light">
                 <thead>
                     <tr>

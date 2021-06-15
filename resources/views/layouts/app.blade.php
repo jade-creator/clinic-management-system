@@ -11,6 +11,9 @@
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
+        <!-- app icon -->
+        <link rel="icon" href="https://drive.google.com/uc?id=1sTGnIM9RvslWvrtCsOwaupBzHUCAF4Rm">
+
         <!-- Fonts -->
         <link rel="dns-prefetch" href="//fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">

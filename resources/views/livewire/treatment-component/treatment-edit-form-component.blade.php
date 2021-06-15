@@ -12,8 +12,8 @@
                         <line x1="5" y1="6" x2="5" y2="6.01"></line>
                         <line x1="5" y1="12" x2="5" y2="12.01"></line>
                         <line x1="5" y1="18" x2="5" y2="18.01"></line>
-                     </svg>
-                    View List
+                    </svg>
+                    <span class="d-none d-md-inline-block">View List</span>
                 </button>
             </a>
         </div>
@@ -25,7 +25,7 @@
 
     <form method="post" wire:submit.prevent="create">
         <div class="form-row">
-            <div class="form-group col">
+            <div class="form-group col-md-6">
                 <label for="treatment">Name</label>
                 <input type="text" class="form-control @error('treatment.name') is-invalid @enderror" id="treatment" name="treatment" required autofocus wire:model.defer="treatment.name" wire:loading.attr="disabled">
                 @error('treatment.name')
@@ -34,7 +34,7 @@
                     </div>
                 @enderror
             </div>
-            <div class="form-group col">
+            <div class="form-group col-md-6">
                 <label for="categories">Category</label>
                 <select name="" id="" class="form-control @error('treatment.category_id') is-invalid @enderror" id="categories" name="categories" required autofocus wire:model.defer="treatment.category_id" wire:loading.attr="disabled"></>
                     <option value="">Choose a category</option>
@@ -61,7 +61,7 @@
             @enderror
         </div>
         <div class="form-row">
-            <div class="form-group col">
+            <div class="form-group col-md-6">
                 <label for="purchase_price">Purchase Price</label>
                 <input type="number" class="form-control @error('treatment.purchase_price') is-invalid @enderror" name="purchase_price" id="purchase_price" required autofocus wire:model.defer="treatment.purchase_price" wire:loading.attr="disabled">
                 @error('treatment.purchase_price')
@@ -70,7 +70,7 @@
                     </div>
                 @enderror
             </div>
-            <div class="form-group col">
+            <div class="form-group col-md-6">
                 <label for="selling_price">Selling Price</label>
                 <input type="number" class="form-control @error('treatment.selling_price') is-invalid @enderror" name="selling_price" id="selling_price" required autofocus wire:model.defer="treatment.selling_price" wire:loading.attr="disabled">
                 @error('treatment.selling_price')

@@ -1,6 +1,6 @@
 <div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
     <div class="c-sidebar-brand d-lg-down-none">
-        <img class="c-sidebar-brand-full" src="https://drive.google.com/uc?id=1bJ3E3d9wY4CXuU4R1vNHVlwRQBQQyqP-" alt="CoreUI Logo" style="width: 100px;">
+        <img class="c-sidebar-brand-full" src="https://drive.google.com/uc?id=1bJ3E3d9wY4CXuU4R1vNHVlwRQBQQyqP-" alt="Clinic's Logo" style="width: 100px;">
     </div>
     <ul class="c-sidebar-nav">
         @if (auth()->user()->role->name == 'patient')

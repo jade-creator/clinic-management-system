@@ -12,19 +12,19 @@
                         <line x1="5" y1="6" x2="5" y2="6.01"></line>
                         <line x1="5" y1="12" x2="5" y2="12.01"></line>
                         <line x1="5" y1="18" x2="5" y2="18.01"></line>
-                     </svg>
-                    View Payment List
+                    </svg>
+                    <span class="d-none d-md-inline-block">View List</span>
                 </button>
             </a>
         </div>
     </div>
     <form method="post" wire:submit.prevent="create">
         <div class="form-row">
-            <div class="form-group col">
+            <div class="form-group col-md-6">
                 <label for="payment_id">Payment ID</label>
                 <input readonly type="number" class="form-control" id="payment_id" name="payment_id" wire:model="deposit.payment_id">
             </div>
-            <div class="form-group col">
+            <div class="form-group col-md-6">
                 <label for="date_deposit">Date</label>
                 <input type="date" class="form-control @error('deposit.date_deposit') is-invalid @enderror" id="date_deposit" name="date_deposit" required autofocus wire:model.defer="deposit.date_deposit" wire:loading.attr="disabled">
                 @error('deposit.date_deposit')
@@ -35,17 +35,17 @@
             </div> 
         </div>
         <div class="form-row">
-            <div class="form-group col">
+            <div class="form-group col-md-6">
                 <label for="grand_total">Grand Total</label>
                 <input readonly type="number" class="form-control" id="grand_total" name="grand_total" wire:model="grand_total">
             </div>
-            <div class="form-group col">
+            <div class="form-group col-md-6">
                 <label for="due">Due Amount</label>
                 <input readonly type="number" class="form-control" id="due" name="due" wire:model="due">
             </div> 
         </div>
         <div class="form-row">
-            <div class="form-group col">
+            <div class="form-group col-md-6">
                 <label for="isCash">Type of Deposit</label>
                 <select class="form-control @error('deposit.isCash') is-invalid @enderror" id="isCash" name="isCash" required autofocus wire:model.defer="deposit.isCash" wire:loading.attr="disabled">
                     <option value="">-- choose type of deposit --</option>
@@ -58,7 +58,7 @@
                     </div>
                 @enderror
             </div>
-            <div class="form-group col">
+            <div class="form-group col-md-6">
                 <label for="amount_deposit">Amount Deposit</label>
                 <input type="number" class="form-control @error('deposit.amount_deposit') is-invalid @enderror" id="amount_deposit" name="amount_deposit" wire:model.defer="deposit.amount_deposit" wire:loading.attr="disabled">
                 @error('deposit.amount_deposit')

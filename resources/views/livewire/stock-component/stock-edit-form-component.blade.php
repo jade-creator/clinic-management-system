@@ -12,15 +12,15 @@
                         <line x1="5" y1="6" x2="5" y2="6.01"></line>
                         <line x1="5" y1="12" x2="5" y2="12.01"></line>
                         <line x1="5" y1="18" x2="5" y2="18.01"></line>
-                     </svg>
-                    View List
+                    </svg>
+                    <span class="d-none d-md-inline-block">View List</span>
                 </button>
             </a>
         </div>
     </div>
     <form method="post" wire:submit.prevent="update">
         <div class="form-row">
-            <div class="form-group col">
+            <div class="form-group col-md-6">
                 <label for="treatment_id">Treatment ID</label>
                 <select class="form-control @error('stock.treatment_id') is-invalid @enderror" name="treatment_id" id="treatment_id" required autofocus wire:model="stock.treatment_id" wire:loading.attr="disabled">
                     <option value="">Choose a Treatment ID</option>
@@ -36,7 +36,7 @@
                     </div>
                 @enderror
             </div>
-            <div class="form-group col">
+            <div class="form-group col-md-6">
                 <label for="treatment_name">Treatment Name</label>
                 <select class="form-control" name="treatment_name" id="treatment_name" required autofocus wire:model="stock.treatment_id" wire:loading.attr="disabled">
                     <option value="">Choose a Treatment Name</option>
