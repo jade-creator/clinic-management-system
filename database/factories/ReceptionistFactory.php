@@ -24,7 +24,10 @@ class ReceptionistFactory extends Factory
     {
         return [
             'user_id' => function() {
-                return User::factory()->create([ 'role_id' => 3 ])->id;
+                return User::factory()->create([ 
+                    'email' => 'receptionist@gmail.com', 
+                    'role_id' => 3 
+                ])->id;
             }
         ];
     }

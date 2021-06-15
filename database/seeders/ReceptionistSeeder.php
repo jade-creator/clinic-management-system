@@ -14,6 +14,6 @@ class ReceptionistSeeder extends Seeder
      */
     public function run()
     {
-        Receptionist::factory()->count(50)->create();
+        Receptionist::factory()->count(1)->create();
     }
 }

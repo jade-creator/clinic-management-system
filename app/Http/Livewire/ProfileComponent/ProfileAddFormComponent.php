@@ -35,12 +35,16 @@ class ProfileAddFormComponent extends Component
     public function create(){
         $this->validate();
 
-        Patient::create([ 
-            'user_id' => $this->user_id,
-        ]);
+        if (Auth::user()->role->name == 'patient') {
+            Patient::create([ 
+                'user_id' => $this->user_id,
+            ]);
+        }
+        
         $this->profile->user_id = $this->user_id;
         $this->profile->save();
 
-        return redirect()->route('profile.view', ['role' => Auth::user()->role->name, 'user_id' => Auth::user()->id]);
+        session()->flash('message', 'Profile Completed!');
+        return redirect(route('profile.view', ['role' => Auth::user()->role->name, 'user_id' => Auth::user()->id]));
     }
 }

@@ -24,7 +24,10 @@ class DoctorFactory extends Factory
     {
         return [
             'user_id' => function() {
-                return User::factory()->create([ 'role_id' => 2 ])->id;
+                return User::factory()->create([ 
+                    'email' => 'doctor@gmail.com', 
+                    'role_id' => 2 
+                ])->id;
             }
         ];
     }
