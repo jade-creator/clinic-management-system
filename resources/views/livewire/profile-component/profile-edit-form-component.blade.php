@@ -2,6 +2,9 @@
     <div class="pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Profile</h1>
     </div>
+    
+    @include('partials.alerts')
+
     <form method="post" wire:submit.prevent="update">
         <div class="form-row">
             <img class="form-control w-25 h-25 mb-3" src="https://www.vippng.com/png/detail/416-4161690_empty-profile-picture-blank-avatar-image-circle.png" alt="avatar"/>

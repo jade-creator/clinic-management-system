@@ -26,7 +26,10 @@ class PatientFactory extends Factory
             'isActive' => 1,
             'note' => null,
             'user_id' => function() {
-                return User::factory()->create([ 'role_id' => 4 ])->id;
+                return User::factory()->create([ 
+                    'email' => 'patient@gmail.com',
+                    'role_id' => 4
+                ])->id;
             }
         ];
     }
