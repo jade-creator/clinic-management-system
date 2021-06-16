@@ -2,10 +2,7 @@
 
 namespace Database\Seeders;
 
-//use App\Models\Doctor;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
+use App\Models\Doctor;
 use Illuminate\Database\Seeder;
 
 class DoctorSeeder extends Seeder
@@ -17,16 +14,6 @@ class DoctorSeeder extends Seeder
      */
     public function run()
     {
-        //Doctor::factory()->count(1)->create();
-        DB::table('users')->insert([
-            'name' => 'Doctor',
-            'email' => 'doctor@gmail.com',
-            'email_verified_at' => now(),
-            'password' => Hash::make('qwert@1Q'), // password
-            'remember_token' => Str::random(10),
-            'role_id' => 2,
-            'created_at' => now(), 
-            'updated_at' => now()
-        ]);
+        Doctor::factory()->count(5)->create();
     }
 }
