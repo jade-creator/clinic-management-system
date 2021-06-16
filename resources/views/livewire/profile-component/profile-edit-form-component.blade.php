@@ -61,7 +61,7 @@
             <div class="form-group col-md-6">
                 <label for="sex">Sex</label>
                 <select id="sex" name="sex" class="form-control @error('profile.sex') is-invalid @enderror" required autofocus wire:model.defer="profile.sex" wire:loading.attr="disabled">
-                  <option value="m">Male</option>
+                  <option value="m" selected>Male</option>
                   <option value="f">Female</option>
                 </select>
                 @error('profile.sex')
