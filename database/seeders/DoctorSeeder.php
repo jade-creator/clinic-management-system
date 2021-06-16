@@ -18,8 +18,6 @@ class DoctorSeeder extends Seeder
     public function run()
     {
         //Doctor::factory()->count(1)->create();
-        DB::table('users')->delete();
-        
         $doctors = [
             [
                 'name' => 'Doctor',
