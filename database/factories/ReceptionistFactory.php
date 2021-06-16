@@ -25,7 +25,7 @@ class ReceptionistFactory extends Factory
         return [
             'user_id' => function() {
                 return User::factory()->create([ 
-                    'email' => 'receptionist@gmail.com', 
+                    'email' => $this->faker->unique()->safeEmail(), 
                     'role_id' => 3 
                 ])->id;
             }
