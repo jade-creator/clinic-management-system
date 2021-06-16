@@ -32,8 +32,8 @@ class DoctorSeeder extends Seeder
                 'updated_at' => now()
             ],
             [
-                'name' => $this->faker->name(),
-                'email' => $this->faker->unique()->safeEmail(),
+                'name' => 'Dr. Emmanuel Cee',
+                'email' => 'emman@gmail.com',
                 'email_verified_at' => now(),
                 'password' => Hash::make('qwert@1Q'), // password
                 'remember_token' => Str::random(10),
@@ -42,8 +42,8 @@ class DoctorSeeder extends Seeder
                 'updated_at' => now()
             ],
             [
-                'name' => $this->faker->name(),
-                'email' => $this->faker->unique()->safeEmail(),
+                'name' => 'Dr. Rash Tree',
+                'email' => 'rash@gmail.com',
                 'email_verified_at' => now(),
                 'password' => Hash::make('qwert@1Q'), // password
                 'remember_token' => Str::random(10),
