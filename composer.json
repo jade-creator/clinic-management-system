@@ -15,7 +15,8 @@
         "laraveldaily/laravel-charts": "^0.1.25",
         "laraveldaily/laravel-invoices": "^2.0",
         "livewire/livewire": "^2.4",
-        "fakerphp/faker": "^1.9.1"
+        "fakerphp/faker": "^1.9.1",
+        "ext-intl": "*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.5",
