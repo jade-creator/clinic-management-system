@@ -23,7 +23,7 @@
     </button>
     
     <ul class="c-header-nav ml-auto mr-4">
-        <li class="c-header-nav-item d-md-down-none mx-2"><a class="c-header-nav-link" href="#">
+        {{-- <li class="c-header-nav-item d-md-down-none mx-2"><a class="c-header-nav-link" href="#">
                 <svg class="c-icon">
                     <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-bell"></use>
                 </svg></a></li>
@@ -34,7 +34,7 @@
         <li class="c-header-nav-item d-md-down-none mx-2"><a class="c-header-nav-link" href="#">
                 <svg class="c-icon">
                     <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-envelope-open"></use>
-                </svg></a></li>
+                </svg></a></li> --}}
         <li class="c-header-nav-item dropdown">
             <a class="c-header-nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                 <div class="c-avatar">
