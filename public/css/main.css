@@ -1,0 +1,15 @@
+.gradient-custom {
+    /* fallback for old browsers */
+    background: #1266f1;
+  
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgba(18, 102, 241, 1), rgba(113, 175, 214, 1));
+  
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgba(18, 102, 241, 1), rgba(113, 175, 214, 1))
+}
+
+.text-xs {
+    font-size: 13px;
+    font-weight: light;
+}

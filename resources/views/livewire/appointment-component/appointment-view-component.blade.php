@@ -50,7 +50,7 @@
         @include('partials.alerts')
 
         <div name="slot" class="table-responsive">
-            <table class="table table-hover table-bordered table-light">
+            <table class="table table-hover table-striped">
                 <thead>
                     <tr>
                         <th class="text-center" scope="col">Patient ID</th>

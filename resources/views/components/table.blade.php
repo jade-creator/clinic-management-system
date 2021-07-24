@@ -1,10 +1,15 @@
 @props([ 'title', 'placeholder' ])
 
 <div class="table-responsive">
-    <div class="d-flex justify-content-between align-items-center border-2 border-bottom pb-3 mb-3">
+    {{-- <div class="d-flex justify-content-between align-items-center border-2 border-bottom pb-3 mb-3">
         <h2>{{ $title }}</h2>
         {{ $button }}
-    </div>  
+    </div>   --}}
+
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-2 border-bottom">
+        <h1 class="h2">{{ $title }}</h1>
+        {{ $button }}
+    </div>
 
     <div class="container-fluid mb-3">
         <div class="row">
