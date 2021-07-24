@@ -47,7 +47,7 @@
         </x-slot>
 
         <div name="slot" class="table-responsive">
-            <table class="table table-hover table-bordered table-light">
+            <table class="table table-hover table-striped table-light">
                 <thead>
                     <tr>
                         <th class="text-left" scope="col">Payment ID</th>

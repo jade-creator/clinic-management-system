@@ -38,6 +38,7 @@
                 <select id="status_id" name="status_id" class="form-control @error('appointment.status_id') is-invalid @enderror" required autofocus wire:model.defer="appointment.status_id" wire:loading.attr="disabled">
                     @forelse ($this->statuses as $status)
                         @if ($loop->first)
+                            <option value="">-- select a status --</option>
                             <option value="{{ $status->id }}" selected>{{ $status->name }}</option>
                         @endif
                     @empty

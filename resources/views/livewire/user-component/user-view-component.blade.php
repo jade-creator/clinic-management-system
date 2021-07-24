@@ -17,7 +17,7 @@
         </x-slot>
 
         <div name="slot" class="table-responsive">
-            <table class="table table-hover table-bordered table-light">
+            <table class="table table-hover table-striped table-light">
                 <thead>
                     <tr>
                         <th class="text-left" scope="col">Role</th>
@@ -42,7 +42,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td scope="row" colspan="5" class="text-center">No users found.</td>
+                            <td scope="row" colspan="7" class="text-center">No users found.</td>
                         </tr>
                     @endforelse
                 </tbody>
