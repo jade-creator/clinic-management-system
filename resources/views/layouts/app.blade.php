@@ -32,7 +32,7 @@
         <div class="row">
             @include('partials.sidebar')
 
-            <div class="col-lg-10 p-0">
+            <div class="col-xl-10 col-lg-12 p-0">
 
                 @include('partials.header')
 
