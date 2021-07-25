@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="pt-4">
         <div class="row">
-            <div class="col-sm-6 col-lg-3">
+            <div class="col-sm-6 col-lg-3 mb-4">
                 <div class="card text-white bg-white shadow">
                     <div class="card-body card-body pb-3 d-flex align-items-start">
                         <div class="text-primary">
@@ -20,7 +20,7 @@
                 </div>
             </div>
 
-            <div class="col-sm-6 col-lg-3">
+            <div class="col-sm-6 col-lg-3 mb-4">
                 <div class="card text-white bg-white shadow">
                     <div class="card-body card-body pb-3 d-flex align-items-start">
                         <div class="text-info">
@@ -34,7 +34,7 @@
                 </div>
             </div>
 
-            <div class="col-sm-6 col-lg-3">
+            <div class="col-sm-6 col-lg-3 mb-4">
                 <div class="card text-white bg-white shadow">
                     <div class="card-body card-body pb-3 d-flex align-items-start">
                         <div class="text-warning">
@@ -54,7 +54,7 @@
                 </div>
             </div>
 
-            <div class="col-sm-6 col-lg-3">
+            <div class="col-sm-6 col-lg-3 mb-4">
                 <div class="card text-white bg-white shadow">
                     <div class="card-body card-body pb-3 d-flex align-items-start">
                         <div class="text-danger">

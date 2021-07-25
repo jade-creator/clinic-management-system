@@ -1,4 +1,4 @@
-<nav class="col-md-2 d-none d-md-block bg-light">
+<nav class="col-md-2 d-none d-xl-block bg-light">
     <div class="sticky-top">
         <ul class="nav flex-column">
             <li class="nav-item py-2 d-flex align-items-center justify-content-center">
@@ -113,7 +113,7 @@
                     </a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle w-full" href="{{ route('users.view') }}" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle w-full" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round" class="w-2 mr-3"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                         <span class="mr-5">All Users&nbsp;</span>
                     </a>
@@ -126,7 +126,7 @@
                     </li>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle w-full" href="{{ route('users.view') }}" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle w-full" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round" class="w-2 mr-3"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
                         <span class="mr-5">Inventory</span>
                     </a>
